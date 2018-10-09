@@ -13,6 +13,8 @@
 		5A9A5DBC216C9BB5009AC45A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5A9A5DBB216C9BB5009AC45A /* Assets.xcassets */; };
 		5A9A5DBF216C9BB5009AC45A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5A9A5DBD216C9BB5009AC45A /* LaunchScreen.storyboard */; };
 		5A9A5DC2216C9BB5009AC45A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A9A5DC1216C9BB5009AC45A /* main.m */; };
+		5A9A5DCF216CABEE009AC45A /* ProductsColTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A9A5DCE216CABEE009AC45A /* ProductsColTableViewCell.m */; };
+		5A9A5DD3216CB6B8009AC45A /* ProductCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A9A5DD2216CB6B8009AC45A /* ProductCollectionViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,12 @@
 		5A9A5DBE216C9BB5009AC45A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5A9A5DC0216C9BB5009AC45A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5A9A5DC1216C9BB5009AC45A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		5A9A5DC8216CA0C0009AC45A /* Constant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constant.h; sourceTree = "<group>"; };
+		5A9A5DC9216CA145009AC45A /* TestAzimDemo-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TestAzimDemo-Prefix.pch"; sourceTree = "<group>"; };
+		5A9A5DCD216CABEE009AC45A /* ProductsColTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProductsColTableViewCell.h; sourceTree = "<group>"; };
+		5A9A5DCE216CABEE009AC45A /* ProductsColTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProductsColTableViewCell.m; sourceTree = "<group>"; };
+		5A9A5DD1216CB6B8009AC45A /* ProductCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProductCollectionViewCell.h; sourceTree = "<group>"; };
+		5A9A5DD2216CB6B8009AC45A /* ProductCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProductCollectionViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +68,9 @@
 			children = (
 				5A9A5DB2216C9BB1009AC45A /* AppDelegate.h */,
 				5A9A5DB3216C9BB1009AC45A /* AppDelegate.m */,
+				5A9A5DCB216CAB56009AC45A /* Model */,
+				5A9A5DCC216CAB70009AC45A /* View */,
+				5A9A5DCA216CAB48009AC45A /* Controller */,
 				5A9A5DB5216C9BB1009AC45A /* ViewController.h */,
 				5A9A5DB6216C9BB1009AC45A /* ViewController.m */,
 				5A9A5DB8216C9BB1009AC45A /* Main.storyboard */,
@@ -67,8 +78,51 @@
 				5A9A5DBD216C9BB5009AC45A /* LaunchScreen.storyboard */,
 				5A9A5DC0216C9BB5009AC45A /* Info.plist */,
 				5A9A5DC1216C9BB5009AC45A /* main.m */,
+				5A9A5DC8216CA0C0009AC45A /* Constant.h */,
+				5A9A5DC9216CA145009AC45A /* TestAzimDemo-Prefix.pch */,
 			);
 			path = TestAzimDemo;
+			sourceTree = "<group>";
+		};
+		5A9A5DCA216CAB48009AC45A /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		5A9A5DCB216CAB56009AC45A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		5A9A5DCC216CAB70009AC45A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				5A9A5DD0216CAFD0009AC45A /* ProductsColTableViewCell */,
+				5A9A5DD4216CB6BF009AC45A /* ProductCellectionViewCell */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		5A9A5DD0216CAFD0009AC45A /* ProductsColTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				5A9A5DCD216CABEE009AC45A /* ProductsColTableViewCell.h */,
+				5A9A5DCE216CABEE009AC45A /* ProductsColTableViewCell.m */,
+			);
+			path = ProductsColTableViewCell;
+			sourceTree = "<group>";
+		};
+		5A9A5DD4216CB6BF009AC45A /* ProductCellectionViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				5A9A5DD1216CB6B8009AC45A /* ProductCollectionViewCell.h */,
+				5A9A5DD2216CB6B8009AC45A /* ProductCollectionViewCell.m */,
+			);
+			path = ProductCellectionViewCell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -142,7 +196,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				5A9A5DB7216C9BB1009AC45A /* ViewController.m in Sources */,
+				5A9A5DD3216CB6B8009AC45A /* ProductCollectionViewCell.m in Sources */,
 				5A9A5DC2216C9BB5009AC45A /* main.m in Sources */,
+				5A9A5DCF216CABEE009AC45A /* ProductsColTableViewCell.m in Sources */,
 				5A9A5DB4216C9BB1009AC45A /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -284,6 +340,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TestAzimDemo/TestAzimDemo-Prefix.pch";
 				INFOPLIST_FILE = TestAzimDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -300,6 +358,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TestAzimDemo/TestAzimDemo-Prefix.pch";
 				INFOPLIST_FILE = TestAzimDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

@@ -1,0 +1,16 @@
+//
+//  TestAzimDemo-Prefix.pch
+//  TestAzimDemo
+//
+//  Created by AZIM-PC on 09/10/18.
+//  Copyright © 2018 Azim. All rights reserved.
+//
+
+#ifndef TestAzimDemo_Prefix_pch
+#define TestAzimDemo_Prefix_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#endif /* TestAzimDemo_Prefix_pch */
+#import "Constant.h"
