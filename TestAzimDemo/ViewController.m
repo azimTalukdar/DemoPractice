@@ -10,6 +10,7 @@
 #import "ProductsColTableViewCell.h"
 #import "ProductCollectionViewCell.h"
 
+
 @interface ViewController ()<UITableViewDelegate,UITableViewDataSource,UICollectionViewDelegate,UICollectionViewDataSource>
 
 @property (nonatomic,strong) UISwitch *switchView;
@@ -24,11 +25,50 @@
     self.navigationController.topViewController.title = @"Demo";
     [self addSwitchBarButton];
     [self setUpTable];
+    [self setObserverForOrientation];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - Orientation Changed
+-(void)setObserverForOrientation
+{
+    [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
+    [[NSNotificationCenter defaultCenter]
+     addObserver:self selector:@selector(orientationChanged:)
+     name:UIDeviceOrientationDidChangeNotification
+     object:[UIDevice currentDevice]];
+}
+
+- (void) orientationChanged:(NSNotification *)note
+{
+    UIDevice * device = note.object;
+    switch(device.orientation)
+    {
+        case UIDeviceOrientationPortrait:
+            /* start special animation */
+            NSLog(@"UIDeviceOrientationPortrait");
+            [_tableWithCollectionView reloadData];
+            break;
+            
+        case UIDeviceOrientationLandscapeLeft:
+            /* start special animation */
+            NSLog(@"UIDeviceOrientationLandscapeLeft");
+            [_tableWithCollectionView reloadData];
+            break;
+            
+        case UIDeviceOrientationLandscapeRight:
+            /* start special animation */
+            NSLog(@"UIDeviceOrientationLandscapeRight");
+            [_tableWithCollectionView reloadData];
+            break;
+            
+        default:
+            break;
+    };
 }
 
 #pragma mark - Switch navigation Bar
@@ -64,7 +104,7 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 3;
+    return 1;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -121,12 +161,13 @@
 
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return 4;
+    return 12;
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    int itemsRows = 3;
     int itemsCols = 3;
+    int itemsRows = 2;
+    
     
     CGSize size_ = collectionView.frame.size;
     

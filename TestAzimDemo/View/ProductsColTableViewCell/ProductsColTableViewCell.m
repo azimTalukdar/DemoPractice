@@ -26,6 +26,7 @@
     _lblTitle.text = @"Category";
     _collectionViewProducts.delegate = dataSourceDelegate;
     _collectionViewProducts.dataSource = dataSourceDelegate;
+    [_collectionViewProducts reloadData];
     
 }
 

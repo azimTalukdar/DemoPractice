@@ -15,9 +15,11 @@
 		5A9A5DC2216C9BB5009AC45A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A9A5DC1216C9BB5009AC45A /* main.m */; };
 		5A9A5DCF216CABEE009AC45A /* ProductsColTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A9A5DCE216CABEE009AC45A /* ProductsColTableViewCell.m */; };
 		5A9A5DD3216CB6B8009AC45A /* ProductCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A9A5DD2216CB6B8009AC45A /* ProductCollectionViewCell.m */; };
+		E3642F0BD4797EF2D70F7056 /* libPods-TestAzimDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 755604FE052E766868BF0058 /* libPods-TestAzimDemo.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		54865580CE3740ED26FA603E /* Pods-TestAzimDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TestAzimDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TestAzimDemo/Pods-TestAzimDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		5A9A5DAF216C9BB1009AC45A /* TestAzimDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestAzimDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A9A5DB2216C9BB1009AC45A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		5A9A5DB3216C9BB1009AC45A /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -34,6 +36,8 @@
 		5A9A5DCE216CABEE009AC45A /* ProductsColTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProductsColTableViewCell.m; sourceTree = "<group>"; };
 		5A9A5DD1216CB6B8009AC45A /* ProductCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProductCollectionViewCell.h; sourceTree = "<group>"; };
 		5A9A5DD2216CB6B8009AC45A /* ProductCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProductCollectionViewCell.m; sourceTree = "<group>"; };
+		755604FE052E766868BF0058 /* libPods-TestAzimDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TestAzimDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8131F2BFC9DB34771ED35F2A /* Pods-TestAzimDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TestAzimDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-TestAzimDemo/Pods-TestAzimDemo.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -41,6 +45,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E3642F0BD4797EF2D70F7056 /* libPods-TestAzimDemo.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -52,6 +57,8 @@
 			children = (
 				5A9A5DB1216C9BB1009AC45A /* TestAzimDemo */,
 				5A9A5DB0216C9BB1009AC45A /* Products */,
+				E180AE2A19B2B9EBDF4EBC1D /* Pods */,
+				84A4B350A6155308673EE3B4 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -102,7 +109,7 @@
 			isa = PBXGroup;
 			children = (
 				5A9A5DD0216CAFD0009AC45A /* ProductsColTableViewCell */,
-				5A9A5DD4216CB6BF009AC45A /* ProductCellectionViewCell */,
+				5A9A5DD4216CB6BF009AC45A /* ProductCollectionViewCell */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -116,13 +123,30 @@
 			path = ProductsColTableViewCell;
 			sourceTree = "<group>";
 		};
-		5A9A5DD4216CB6BF009AC45A /* ProductCellectionViewCell */ = {
+		5A9A5DD4216CB6BF009AC45A /* ProductCollectionViewCell */ = {
 			isa = PBXGroup;
 			children = (
 				5A9A5DD1216CB6B8009AC45A /* ProductCollectionViewCell.h */,
 				5A9A5DD2216CB6B8009AC45A /* ProductCollectionViewCell.m */,
 			);
-			path = ProductCellectionViewCell;
+			path = ProductCollectionViewCell;
+			sourceTree = "<group>";
+		};
+		84A4B350A6155308673EE3B4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				755604FE052E766868BF0058 /* libPods-TestAzimDemo.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E180AE2A19B2B9EBDF4EBC1D /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				54865580CE3740ED26FA603E /* Pods-TestAzimDemo.debug.xcconfig */,
+				8131F2BFC9DB34771ED35F2A /* Pods-TestAzimDemo.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -132,6 +156,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5A9A5DC5216C9BB5009AC45A /* Build configuration list for PBXNativeTarget "TestAzimDemo" */;
 			buildPhases = (
+				CE97C89BE577501B075B2769 /* [CP] Check Pods Manifest.lock */,
 				5A9A5DAB216C9BB1009AC45A /* Sources */,
 				5A9A5DAC216C9BB1009AC45A /* Frameworks */,
 				5A9A5DAD216C9BB1009AC45A /* Resources */,
@@ -189,6 +214,27 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		CE97C89BE577501B075B2769 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-TestAzimDemo-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		5A9A5DAB216C9BB1009AC45A /* Sources */ = {
@@ -337,6 +383,7 @@
 		};
 		5A9A5DC6216C9BB5009AC45A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 54865580CE3740ED26FA603E /* Pods-TestAzimDemo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -355,6 +402,7 @@
 		};
 		5A9A5DC7216C9BB5009AC45A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8131F2BFC9DB34771ED35F2A /* Pods-TestAzimDemo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

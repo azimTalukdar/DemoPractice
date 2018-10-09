@@ -65,20 +65,29 @@
                                                                 <rect key="frame" x="0.0" y="0.0" width="98" height="62"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <subviews>
-                                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rk9-7W-20j">
+                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rk9-7W-20j">
                                                                         <rect key="frame" x="2" y="2" width="94" height="58"/>
-                                                                        <color key="backgroundColor" red="0.3684549332" green="0.80269533400000004" blue="0.44402867559999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     </imageView>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bJO-66-Crp">
+                                                                        <rect key="frame" x="2" y="42" width="94" height="18"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                                        <nil key="textColor"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
                                                                 </subviews>
                                                             </view>
                                                             <constraints>
+                                                                <constraint firstItem="bJO-66-Crp" firstAttribute="leading" secondItem="5yE-18-8AL" secondAttribute="leading" constant="2" id="1Cp-P3-Oe6"/>
+                                                                <constraint firstAttribute="bottom" secondItem="bJO-66-Crp" secondAttribute="bottom" constant="2" id="Err-SG-fbJ"/>
                                                                 <constraint firstItem="rk9-7W-20j" firstAttribute="top" secondItem="5yE-18-8AL" secondAttribute="top" constant="2" id="GVC-Me-7Mw"/>
+                                                                <constraint firstAttribute="trailing" secondItem="bJO-66-Crp" secondAttribute="trailing" constant="2" id="RYA-kW-mg1"/>
                                                                 <constraint firstItem="rk9-7W-20j" firstAttribute="leading" secondItem="5yE-18-8AL" secondAttribute="leading" constant="2" id="SiT-kd-31N"/>
                                                                 <constraint firstAttribute="bottom" secondItem="rk9-7W-20j" secondAttribute="bottom" constant="2" id="TAE-4d-jeA"/>
                                                                 <constraint firstAttribute="trailing" secondItem="rk9-7W-20j" secondAttribute="trailing" constant="2" id="wJK-bI-yLn"/>
                                                             </constraints>
                                                             <connections>
                                                                 <outlet property="imgProduct" destination="rk9-7W-20j" id="gJQ-iL-ZXv"/>
+                                                                <outlet property="lblTitle" destination="bJO-66-Crp" id="kgF-7s-d0d"/>
                                                             </connections>
                                                         </collectionViewCell>
                                                     </cells>
