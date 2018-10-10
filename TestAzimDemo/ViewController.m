@@ -225,7 +225,7 @@
     static NSString *identifierCol = @"ProductCollectionViewCell";
     ProductCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifierCol forIndexPath:indexPath];
     NSDictionary *dict = [categoryArr objectAtIndex:collectionView.tag];
-    ObjectModel *model_ = [[dict objectForKey:@"product"] objectAtIndex:indexPath.item];
+    ObjectModel *model_ = [[dict objectForKey:@"products"] objectAtIndex:indexPath.item];
     [cell configureCell:model_];
     return cell;
 }

@@ -15,13 +15,12 @@
 //    NSLog(@"ObjectModel %@",Arr);
     NSMutableArray *objectsArr = [[NSMutableArray alloc] init];
     for (NSDictionary *dict1 in Arr) {
-        _sku = (int)[dict1 objectForKey:@"sku"];
-        _name = (NSString *)[dict1 objectForKey:@"name"];
-        _cost = (int)[dict1 objectForKey:@"cost"];
-        [objectsArr addObject:self];
+        ObjectModel *model = [[ObjectModel alloc] init];
+        model.sku = (int)[dict1 objectForKey:@"sku"];
+        model.name = (NSString *)[dict1 objectForKey:@"name"];
+        model.cost = (int)[dict1 objectForKey:@"cost"];
+        [objectsArr addObject:model];
     }
-    
-//    NSLog(@"objectsArr %@",objectsArr);
     return objectsArr;
 }
 
