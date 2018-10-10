@@ -55,11 +55,11 @@
         } else {
             NSLog(@"azim data %@",[responseObject objectForKey:@"meta"]);
             ProductModel *model_ = [[ProductModel alloc]  initWithData:responseObject];
-            NSLog(@"Azim Data %ld",(long)model_.meta.count);
+//            NSLog(@"Azim Data %ld",(long)model_.meta.count);
             self->productsArr = [[NSArray alloc] initWithArray:model_.objects];
-            NSLog(@"productsArr count %lu",(unsigned long)self->productsArr.count);
-            NSLog(@"objects data %@",[model_.objects firstObject].name);
-//            [self->_tableWithCollectionView reloadData];
+//            NSLog(@"productsArr count %lu",(unsigned long)self->productsArr.count);
+//            NSLog(@"objects data %@",[model_.objects firstObject].name);
+            [self->_tableWithCollectionView reloadData];
         }
     }];
     [dataTask resume];
@@ -141,7 +141,7 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 4;//categoryArr.count;
+    return categoryArr.count;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -198,8 +198,9 @@
 
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    NSLog(@"numberOfItemsInSection %lu",(unsigned long)productsArr.count);
-    return (productsArr == nil) ? 0 : collectionView.tag;
+//    NSLog(@"numberOfItemsInSection %lu",(unsigned long)productsArr);
+    ProductModel *model_ = [productsArr objectAtIndex:collectionView.tag];
+    return (productsArr == nil) ? 0 : model_.objects.count;
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -216,7 +217,8 @@
 {
     static NSString *identifierCol = @"ProductCollectionViewCell";
     ProductCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifierCol forIndexPath:indexPath];
-    [cell configureCell:nil];//[productsArr objectAtIndex:indexPath.row]
+    ProductModel *model_ = [productsArr objectAtIndex:collectionView.tag];
+    [cell configureCell:[model_.objects objectAtIndex:indexPath.item]];
     return cell;
 }
 
