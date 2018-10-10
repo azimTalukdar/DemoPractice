@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #import "ProductsColTableViewCell.h"
 #import "ProductCollectionViewCell.h"
+#import <AFNetworking.h>
 
 
 @interface ViewController ()<UITableViewDelegate,UITableViewDataSource,UICollectionViewDelegate,UICollectionViewDataSource>
@@ -26,6 +27,25 @@
     [self addSwitchBarButton];
     [self setUpTable];
     [self setObserverForOrientation];
+    [self getService];
+}
+
+-(void)getService
+{
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
+    
+    NSURL *URL = [NSURL URLWithString:@"http://httpbin.org/get"];
+    NSURLRequest *request = [NSURLRequest requestWithURL:URL];
+    
+    NSURLSessionDataTask *dataTask = [manager dataTaskWithRequest:request uploadProgress:nil downloadProgress:nil completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+        if (error) {
+            NSLog(@"Error: %@", error);
+        } else {
+            NSLog(@"%@ AZIM %@", response, responseObject);
+        }
+    }];
+    [dataTask resume];
 }
 
 - (void)didReceiveMemoryWarning {
