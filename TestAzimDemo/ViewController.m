@@ -17,6 +17,8 @@
 {
     NSArray *categoryArr;
     NSArray *productsArr;
+    
+    ProductModel *modelProdcut;
 }
 
 @property (nonatomic,strong) UISwitch *switchView;
@@ -46,7 +48,7 @@
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
     NSString *finalUrl = [NSString stringWithFormat:@"%@/%@",BASE_URL,categoryArr[0]];
-    NSURL *URL = [NSURL URLWithString:finalUrl];
+    NSURL *URL = [NSURL URLWithString:finalUrl];NSLog(@"url is %@",finalUrl);
     NSURLRequest *request = [NSURLRequest requestWithURL:URL];
     
     NSURLSessionDataTask *dataTask = [manager dataTaskWithRequest:request uploadProgress:nil downloadProgress:nil completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
@@ -54,11 +56,8 @@
             NSLog(@"Error: %@", error);
         } else {
             NSLog(@"azim data %@",[responseObject objectForKey:@"meta"]);
-            ProductModel *model_ = [[ProductModel alloc]  initWithData:responseObject];
-//            NSLog(@"Azim Data %ld",(long)model_.meta.count);
-            self->productsArr = [[NSArray alloc] initWithArray:model_.objects];
-//            NSLog(@"productsArr count %lu",(unsigned long)self->productsArr.count);
-//            NSLog(@"objects data %@",[model_.objects firstObject].name);
+            self->modelProdcut = [[ProductModel alloc]  initWithData:responseObject];
+            self->productsArr = [[NSArray alloc] initWithArray:self->modelProdcut.objects];
             [self->_tableWithCollectionView reloadData];
         }
     }];
@@ -141,7 +140,7 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return categoryArr.count;
+    return 1;//categoryArr.count;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -199,8 +198,8 @@
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
 //    NSLog(@"numberOfItemsInSection %lu",(unsigned long)productsArr);
-    ProductModel *model_ = [productsArr objectAtIndex:collectionView.tag];
-    return (productsArr == nil) ? 0 : model_.objects.count;
+    ObjectModel *model_ = [productsArr objectAtIndex:collectionView.tag];
+    return (productsArr == 0) ? 0 : productsArr.count;
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -217,8 +216,8 @@
 {
     static NSString *identifierCol = @"ProductCollectionViewCell";
     ProductCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifierCol forIndexPath:indexPath];
-    ProductModel *model_ = [productsArr objectAtIndex:collectionView.tag];
-    [cell configureCell:[model_.objects objectAtIndex:indexPath.item]];
+//    ProductModel *model_ = [productsArr objectAtIndex:collectionView.tag];
+    [cell configureCell:[modelProdcut.objects objectAtIndex:indexPath.item]];
     return cell;
 }
 

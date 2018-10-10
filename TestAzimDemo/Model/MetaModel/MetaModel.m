@@ -12,7 +12,7 @@
 
 -(id) initWithData:(NSDictionary *)dict
 {
-    NSLog(@"MetaModel initWithData %@",dict);
+//    NSLog(@"MetaModel initWithData %@",dict);
     self = [super init];
     if (self) {
         _count = (int)[dict objectForKey:@"count"];

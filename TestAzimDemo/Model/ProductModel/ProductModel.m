@@ -36,11 +36,11 @@
 
 -(id)initWithData:(NSDictionary *)dict
 {
-    NSLog(@"ProductModel initWithData %@",dict);
+//    NSLog(@"ProductModel initWithData %@",dict);
     self = [super init];
     if (self) {
         _meta = [[MetaModel alloc] initWithData:[dict objectForKey:@"meta"]];
-        NSLog(@"ProductModel %d",_meta.count);
+//        NSLog(@"ProductModel %d",_meta.count);
         ObjectModel *model_ = [[ObjectModel alloc] init];
         _objects = [model_ createArray:[dict objectForKey:@"objects"]];
     }

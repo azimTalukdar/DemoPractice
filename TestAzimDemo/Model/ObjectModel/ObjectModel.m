@@ -12,7 +12,7 @@
 
 -(NSMutableArray *)createArray:(NSArray *)Arr
 {
-    NSLog(@"ObjectModel %@",Arr);
+//    NSLog(@"ObjectModel %@",Arr);
     NSMutableArray *objectsArr = [[NSMutableArray alloc] init];
     for (NSDictionary *dict1 in Arr) {
         _sku = (int)[dict1 objectForKey:@"sku"];
@@ -21,7 +21,7 @@
         [objectsArr addObject:self];
     }
     
-    NSLog(@"objectsArr %@",objectsArr);
+//    NSLog(@"objectsArr %@",objectsArr);
     return objectsArr;
 }
 
