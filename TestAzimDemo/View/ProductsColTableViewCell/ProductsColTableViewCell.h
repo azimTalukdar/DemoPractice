@@ -13,5 +13,5 @@
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segFilter;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionViewProducts;
 
--(void)ConfigureCell:(id<UICollectionViewDelegate,UICollectionViewDataSource>)dataSourceDelegate;
+-(void)ConfigureCell:(id<UICollectionViewDelegate,UICollectionViewDataSource>)dataSourceDelegate IndexPath:(NSIndexPath *)indexPath;
 @end

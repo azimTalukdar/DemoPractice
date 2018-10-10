@@ -15,6 +15,9 @@
 		5A9A5DC2216C9BB5009AC45A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A9A5DC1216C9BB5009AC45A /* main.m */; };
 		5A9A5DCF216CABEE009AC45A /* ProductsColTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A9A5DCE216CABEE009AC45A /* ProductsColTableViewCell.m */; };
 		5A9A5DD3216CB6B8009AC45A /* ProductCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A9A5DD2216CB6B8009AC45A /* ProductCollectionViewCell.m */; };
+		5AB9B1C0216DDD520098C0B5 /* ProductModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AB9B1BF216DDD520098C0B5 /* ProductModel.m */; };
+		5AB9B1C4216DEE210098C0B5 /* ObjectModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AB9B1C3216DEE210098C0B5 /* ObjectModel.m */; };
+		5AB9B1C8216DEE480098C0B5 /* MetaModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AB9B1C7216DEE480098C0B5 /* MetaModel.m */; };
 		E3642F0BD4797EF2D70F7056 /* libPods-TestAzimDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 755604FE052E766868BF0058 /* libPods-TestAzimDemo.a */; };
 /* End PBXBuildFile section */
 
@@ -36,6 +39,12 @@
 		5A9A5DCE216CABEE009AC45A /* ProductsColTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProductsColTableViewCell.m; sourceTree = "<group>"; };
 		5A9A5DD1216CB6B8009AC45A /* ProductCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProductCollectionViewCell.h; sourceTree = "<group>"; };
 		5A9A5DD2216CB6B8009AC45A /* ProductCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProductCollectionViewCell.m; sourceTree = "<group>"; };
+		5AB9B1BE216DDD520098C0B5 /* ProductModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProductModel.h; sourceTree = "<group>"; };
+		5AB9B1BF216DDD520098C0B5 /* ProductModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProductModel.m; sourceTree = "<group>"; };
+		5AB9B1C2216DEE210098C0B5 /* ObjectModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObjectModel.h; sourceTree = "<group>"; };
+		5AB9B1C3216DEE210098C0B5 /* ObjectModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ObjectModel.m; sourceTree = "<group>"; };
+		5AB9B1C6216DEE480098C0B5 /* MetaModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MetaModel.h; sourceTree = "<group>"; };
+		5AB9B1C7216DEE480098C0B5 /* MetaModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MetaModel.m; sourceTree = "<group>"; };
 		755604FE052E766868BF0058 /* libPods-TestAzimDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TestAzimDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8131F2BFC9DB34771ED35F2A /* Pods-TestAzimDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TestAzimDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-TestAzimDemo/Pods-TestAzimDemo.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -101,6 +110,9 @@
 		5A9A5DCB216CAB56009AC45A /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				5AB9B1C1216DDD5E0098C0B5 /* ProductModel */,
+				5AB9B1C5216DEE270098C0B5 /* ObjectModel */,
+				5AB9B1C9216DEE4C0098C0B5 /* MetaModel */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -130,6 +142,33 @@
 				5A9A5DD2216CB6B8009AC45A /* ProductCollectionViewCell.m */,
 			);
 			path = ProductCollectionViewCell;
+			sourceTree = "<group>";
+		};
+		5AB9B1C1216DDD5E0098C0B5 /* ProductModel */ = {
+			isa = PBXGroup;
+			children = (
+				5AB9B1BE216DDD520098C0B5 /* ProductModel.h */,
+				5AB9B1BF216DDD520098C0B5 /* ProductModel.m */,
+			);
+			path = ProductModel;
+			sourceTree = "<group>";
+		};
+		5AB9B1C5216DEE270098C0B5 /* ObjectModel */ = {
+			isa = PBXGroup;
+			children = (
+				5AB9B1C2216DEE210098C0B5 /* ObjectModel.h */,
+				5AB9B1C3216DEE210098C0B5 /* ObjectModel.m */,
+			);
+			path = ObjectModel;
+			sourceTree = "<group>";
+		};
+		5AB9B1C9216DEE4C0098C0B5 /* MetaModel */ = {
+			isa = PBXGroup;
+			children = (
+				5AB9B1C6216DEE480098C0B5 /* MetaModel.h */,
+				5AB9B1C7216DEE480098C0B5 /* MetaModel.m */,
+			);
+			path = MetaModel;
 			sourceTree = "<group>";
 		};
 		84A4B350A6155308673EE3B4 /* Frameworks */ = {
@@ -242,9 +281,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				5A9A5DB7216C9BB1009AC45A /* ViewController.m in Sources */,
+				5AB9B1C0216DDD520098C0B5 /* ProductModel.m in Sources */,
 				5A9A5DD3216CB6B8009AC45A /* ProductCollectionViewCell.m in Sources */,
+				5AB9B1C4216DEE210098C0B5 /* ObjectModel.m in Sources */,
 				5A9A5DC2216C9BB5009AC45A /* main.m in Sources */,
 				5A9A5DCF216CABEE009AC45A /* ProductsColTableViewCell.m in Sources */,
+				5AB9B1C8216DEE480098C0B5 /* MetaModel.m in Sources */,
 				5A9A5DB4216C9BB1009AC45A /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

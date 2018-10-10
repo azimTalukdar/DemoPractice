@@ -10,9 +10,14 @@
 #import "ProductsColTableViewCell.h"
 #import "ProductCollectionViewCell.h"
 #import <AFNetworking.h>
+#import "ProductModel.h"
 
 
 @interface ViewController ()<UITableViewDelegate,UITableViewDataSource,UICollectionViewDelegate,UICollectionViewDataSource>
+{
+    NSArray *categoryArr;
+    NSArray *productsArr;
+}
 
 @property (nonatomic,strong) UISwitch *switchView;
 
@@ -24,25 +29,38 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     self.navigationController.topViewController.title = @"Demo";
+    [self initVariable];
     [self addSwitchBarButton];
     [self setUpTable];
     [self setObserverForOrientation];
     [self getService];
 }
 
+-(void)initVariable
+{
+    categoryArr = [[NSArray alloc] initWithObjects:@"jackets",@"polos",@"shirts",@"sweatshirt", nil];
+}
+
 -(void)getService
 {
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
-    
-    NSURL *URL = [NSURL URLWithString:@"http://httpbin.org/get"];
+    NSString *finalUrl = [NSString stringWithFormat:@"%@/%@",BASE_URL,categoryArr[0]];
+    NSURL *URL = [NSURL URLWithString:finalUrl];
     NSURLRequest *request = [NSURLRequest requestWithURL:URL];
     
     NSURLSessionDataTask *dataTask = [manager dataTaskWithRequest:request uploadProgress:nil downloadProgress:nil completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
         if (error) {
             NSLog(@"Error: %@", error);
         } else {
-            NSLog(@"%@ AZIM %@", response, responseObject);
+//            NSLog(@"%@ AZIM %@", response, responseObject);
+//            id response = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingAllowFragments error:&parseJsonError];
+//            NSLog(@"azim data %@",[responseObject objectForKey:@"meta"]);
+            ProductModel *model_ = [[ProductModel alloc]  initWithData:responseObject];
+            NSLog(@"Azim Data %ld",(long)model_.meta.count);
+            self->productsArr = [[NSArray alloc] initWithArray:model_.objects];
+            NSLog(@"productsArr count %lu",(unsigned long)self->productsArr.count);
+//            [self->_tableWithCollectionView reloadData];
         }
     }];
     [dataTask resume];
@@ -124,7 +142,7 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 1;
+    return 4;//categoryArr.count;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -143,7 +161,7 @@
     ProductsColTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifierRow];
     cell.segFilter.tag = indexPath.row;
     [cell.segFilter addTarget:self action:@selector(filerProduct:) forControlEvents:UIControlEventValueChanged];
-    [cell ConfigureCell:self];
+    [cell ConfigureCell:self IndexPath:indexPath];
     return cell;
 }
 
@@ -181,7 +199,8 @@
 
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return 12;
+    NSLog(@"numberOfItemsInSection %lu",(unsigned long)productsArr.count);
+    return (productsArr == nil) ? 0 : collectionView.tag;
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -198,7 +217,7 @@
 {
     static NSString *identifierCol = @"ProductCollectionViewCell";
     ProductCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifierCol forIndexPath:indexPath];
-    [cell configureCell];
+    [cell configureCell:nil];//[productsArr objectAtIndex:indexPath.row]
     return cell;
 }
 
