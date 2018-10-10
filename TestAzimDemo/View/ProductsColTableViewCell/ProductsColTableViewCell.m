@@ -22,9 +22,9 @@
     // Configure the view for the selected state
 }
 
--(void)ConfigureCell:(id<UICollectionViewDelegate,UICollectionViewDataSource>)dataSourceDelegate IndexPath:(NSIndexPath *)indexPath
+-(void)ConfigureCell:(id<UICollectionViewDelegate,UICollectionViewDataSource>)dataSourceDelegate IndexPath:(NSIndexPath *)indexPath Title:(NSString *)title
 {
-    _lblTitle.text = @"Category";
+    _lblTitle.text = [title uppercaseString];
     _collectionViewProducts.delegate = dataSourceDelegate;
     _collectionViewProducts.dataSource = dataSourceDelegate;
     

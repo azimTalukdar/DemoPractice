@@ -148,7 +148,7 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSLog(@"number of row %d",categoryArr.count);
+    NSLog(@"number of row %lu",(unsigned long)categoryArr.count);
     return categoryArr.count;
 }
 
@@ -168,7 +168,7 @@
     ProductsColTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifierRow];
     cell.segFilter.tag = indexPath.row;
     [cell.segFilter addTarget:self action:@selector(filerProduct:) forControlEvents:UIControlEventValueChanged];
-    [cell ConfigureCell:self IndexPath:indexPath];
+    [cell ConfigureCell:self IndexPath:indexPath Title:[[categoryArr objectAtIndex:indexPath.row] objectForKey:@"category"]];
     return cell;
 }
 
