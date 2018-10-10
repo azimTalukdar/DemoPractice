@@ -15,10 +15,10 @@
 
 @interface ViewController ()<UITableViewDelegate,UITableViewDataSource,UICollectionViewDelegate,UICollectionViewDataSource>
 {
-    NSArray *categoryArr;
+    NSMutableArray *categoryArr;
     NSArray *productsArr;
     
-    ProductModel *modelProdcut;
+//    ProductModel *modelProdcut;
 }
 
 @property (nonatomic,strong) UISwitch *switchView;
@@ -35,19 +35,23 @@
     [self addSwitchBarButton];
     [self setUpTable];
     [self setObserverForOrientation];
-    [self getService];
+//    [self getService];
 }
 
 -(void)initVariable
 {
-    categoryArr = [[NSArray alloc] initWithObjects:@"jackets",@"polos",@"shirts",@"sweatshirt", nil];
+    categoryArr = [[NSMutableArray alloc]  init];
+    NSArray *serviceArr = [[NSArray alloc] initWithObjects:@"jackets",@"polos",@"shirts", nil];//@"sweatshirt"
+    for (NSString *service in serviceArr) {
+        [self getService:service];
+    }
 }
 
--(void)getService
+-(void)getService:(NSString *)service
 {
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
-    NSString *finalUrl = [NSString stringWithFormat:@"%@/%@",BASE_URL,categoryArr[0]];
+    NSString *finalUrl = [NSString stringWithFormat:@"%@/%@",BASE_URL,service];
     NSURL *URL = [NSURL URLWithString:finalUrl];NSLog(@"url is %@",finalUrl);
     NSURLRequest *request = [NSURLRequest requestWithURL:URL];
     
@@ -55,9 +59,13 @@
         if (error) {
             NSLog(@"Error: %@", error);
         } else {
-            NSLog(@"azim data %@",[responseObject objectForKey:@"meta"]);
-            self->modelProdcut = [[ProductModel alloc]  initWithData:responseObject];
-            self->productsArr = [[NSArray alloc] initWithArray:self->modelProdcut.objects];
+            NSLog(@"%@ url succeded",service);
+            ProductModel *modelProdcut = [[ProductModel alloc]  initWithData:responseObject];
+            NSMutableDictionary *dict_ = [[NSMutableDictionary alloc] init];
+            [dict_ setObject:service forKey:@"category"];
+            [dict_ setObject:modelProdcut.objects forKey:@"products"];
+            [self->categoryArr addObject:dict_];
+            
             [self->_tableWithCollectionView reloadData];
         }
     }];
@@ -140,7 +148,8 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 1;//categoryArr.count;
+    NSLog(@"number of row %d",categoryArr.count);
+    return categoryArr.count;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -197,9 +206,8 @@
 
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-//    NSLog(@"numberOfItemsInSection %lu",(unsigned long)productsArr);
-    ObjectModel *model_ = [productsArr objectAtIndex:collectionView.tag];
-    return (productsArr == 0) ? 0 : productsArr.count;
+    NSDictionary *dict = [categoryArr objectAtIndex:collectionView.tag];
+    return [(NSArray *)[dict objectForKey:@"products"] count];
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -216,8 +224,8 @@
 {
     static NSString *identifierCol = @"ProductCollectionViewCell";
     ProductCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifierCol forIndexPath:indexPath];
-//    ProductModel *model_ = [productsArr objectAtIndex:collectionView.tag];
-    [cell configureCell:[modelProdcut.objects objectAtIndex:indexPath.item]];
+    ProductModel *model_ = [categoryArr objectAtIndex:collectionView.tag];
+    [cell configureCell:[model_.objects objectAtIndex:indexPath.item]];
     return cell;
 }
 
