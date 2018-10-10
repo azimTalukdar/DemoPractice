@@ -9,8 +9,8 @@
 #import <Foundation/Foundation.h>
 
 @interface ObjectModel : NSObject
-@property (nonatomic, assign) NSInteger sku;
+@property (nonatomic, assign) int sku;
 @property (nonatomic, copy)   NSString *name;
-@property (nonatomic, assign) NSInteger cost;
+@property (nonatomic, assign) int cost;
 -(NSMutableArray *)createArray:(NSDictionary *)dict;
 @end

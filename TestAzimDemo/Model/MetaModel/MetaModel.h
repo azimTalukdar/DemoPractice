@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @interface MetaModel : NSObject
-@property (nonatomic, assign) NSInteger count;
+@property (nonatomic, assign) int count;
 @property (nonatomic, assign) BOOL isSuccess;
 -(id) initWithData:(NSDictionary *)dict;
 @end

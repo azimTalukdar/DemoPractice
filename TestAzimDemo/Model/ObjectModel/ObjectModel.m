@@ -10,17 +10,18 @@
 
 @implementation ObjectModel
 
--(NSMutableArray *)createArray:(NSDictionary *)dict
+-(NSMutableArray *)createArray:(NSArray *)Arr
 {
+    NSLog(@"ObjectModel %@",Arr);
     NSMutableArray *objectsArr = [[NSMutableArray alloc] init];
-    if (self) {
-        for (NSDictionary *dict1 in [dict objectForKey:@"objects"]) {
-            _sku = (NSInteger)[dict1 objectForKey:@"sku"];
-            _name = (NSString *)[dict1 objectForKey:@"name"];
-            _cost = (NSInteger)[dict1 objectForKey:@"cost"];
-            [objectsArr addObject:self];
-        }
+    for (NSDictionary *dict1 in Arr) {
+        _sku = (int)[dict1 objectForKey:@"sku"];
+        _name = (NSString *)[dict1 objectForKey:@"name"];
+        _cost = (int)[dict1 objectForKey:@"cost"];
+        [objectsArr addObject:self];
     }
+    
+    NSLog(@"objectsArr %@",objectsArr);
     return objectsArr;
 }
 

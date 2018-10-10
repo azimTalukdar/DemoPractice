@@ -12,8 +12,8 @@
 
 @implementation ProductModel
 
--(ProductModel *)createModel:(NSDictionary *)dict
-{
+//-(ProductModel *)createModel:(NSDictionary *)dict
+//{
 //    ATMeta *meta_ = [[ATMeta alloc] init];
 //    meta_.count = (NSInteger)[[dict objectForKey:@"meta"] objectForKey:@"count"];
 //    meta_.isSuccess = (BOOL)[[dict objectForKey:@"meta"] objectForKey:@"success"];
@@ -27,18 +27,22 @@
 //        [objectsArr addObject:object_];
 //    }
     
-    ProductModel *productModel_ = [[ProductModel alloc] init];
-    productModel_.meta = [[MetaModel alloc] initWithData:dict];
-    ObjectModel *model_ = [[ObjectModel alloc] init];
-    productModel_.objects = [model_ createArray:[dict objectForKey:@"object"]];
-    return productModel_;
-}
+//    ProductModel *productModel_ = [[ProductModel alloc] init];
+//    _meta = [[MetaModel alloc] initWithData:dict];
+//    ObjectModel *model_ = [[ObjectModel alloc] init];
+//    _objects = [model_ createArray:[dict objectForKey:@"object"]];
+//    return self;
+//}
 
--(id) initWithData:(NSDictionary *)dict
+-(id)initWithData:(NSDictionary *)dict
 {
+    NSLog(@"ProductModel initWithData %@",dict);
     self = [super init];
     if (self) {
-        self = [self createModel:dict];
+        _meta = [[MetaModel alloc] initWithData:[dict objectForKey:@"meta"]];
+        NSLog(@"ProductModel %d",_meta.count);
+        ObjectModel *model_ = [[ObjectModel alloc] init];
+        _objects = [model_ createArray:[dict objectForKey:@"objects"]];
     }
     return self;
 }

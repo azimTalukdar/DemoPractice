@@ -53,13 +53,12 @@
         if (error) {
             NSLog(@"Error: %@", error);
         } else {
-//            NSLog(@"%@ AZIM %@", response, responseObject);
-//            id response = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingAllowFragments error:&parseJsonError];
-//            NSLog(@"azim data %@",[responseObject objectForKey:@"meta"]);
+            NSLog(@"azim data %@",[responseObject objectForKey:@"meta"]);
             ProductModel *model_ = [[ProductModel alloc]  initWithData:responseObject];
             NSLog(@"Azim Data %ld",(long)model_.meta.count);
             self->productsArr = [[NSArray alloc] initWithArray:model_.objects];
             NSLog(@"productsArr count %lu",(unsigned long)self->productsArr.count);
+            NSLog(@"objects data %@",[model_.objects firstObject].name);
 //            [self->_tableWithCollectionView reloadData];
         }
     }];
