@@ -32,11 +32,17 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     self.navigationController.topViewController.title = @"Demo";
+    
     [self initVariable];
     [self addSwitchBarButton];
     [self setUpTable];
     [self setObserverForOrientation];
 //    [self getService];
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
 }
 
 -(void)initVariable
@@ -130,9 +136,39 @@
 {
     if (_switchView.isOn) {
         //Show Table
+        [self displayCollectionTable:NO];
     }else{
         //Show Collection
+        [self displayCollectionTable:YES];
     }
+}
+
+-(void)displayCollectionTable:(BOOL)isDisplay
+{
+
+    if (isDisplay) {
+        _tableWithCollectionView.alpha = 1;
+        _tableCollapsableView.alpha = 0;
+    }
+    else
+    {
+        _tableWithCollectionView.alpha = 0;
+        _tableCollapsableView.alpha = 1;
+    }
+//    [UIView animateWithDuration:3.5 animations:^{
+//        if (isDisplay) {
+//            self->_constantTableCollection.constant = 0;
+//            self->_constantTableCollapsable.constant = 0 - self->_tableCollapsableView.frame.size.width;
+//        }
+//        else
+//        {
+//            self->_constantTableCollection.constant = self->_tableWithCollectionView.frame.size.width;
+//            self->_constantTableCollapsable.constant = 0;
+//        }
+//
+//
+//    } completion:^(BOOL finished) {
+//    }];
 }
 
 #pragma mark - TableView init, Delegate and Datasource
@@ -141,17 +177,36 @@
 {
     _tableWithCollectionView.delegate = self;
     _tableWithCollectionView.dataSource = self;
+    
+    _tableCollapsableView.delegate = self;
+    _tableCollapsableView.dataSource = self;
+    
+    _tableCollapsableView.alpha = 0;
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    if (tableView == _tableCollapsableView) {
+        return categoryArr.count;
+    }
+    else
+    {
+        return 1;
+    }
+    
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSLog(@"number of row %lu",(unsigned long)categoryArr.count);
-    return categoryArr.count;
+    if (tableView == _tableCollapsableView) {
+        NSArray *objects = [[categoryArr objectAtIndex:section] objectForKey:@"products"];
+        return objects.count;
+    }
+    else
+    {
+        return categoryArr.count;
+    }
+    
 }
 
 -(CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -167,17 +222,41 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *identifierRow = @"ProductsColTableViewCell";
-    ProductsColTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifierRow];
-    cell.segFilter.tag = indexPath.row;
-    [cell.segFilter addTarget:self action:@selector(filerProduct:) forControlEvents:UIControlEventValueChanged];
-    [cell ConfigureCell:self IndexPath:indexPath Dictionary:[categoryArr objectAtIndex:indexPath.row]];
-    return cell;
+    static NSString *identifierRowNormal = @"defaultCell";//
+    if (tableView == _tableCollapsableView) {
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifierRowNormal];
+        ObjectModel *model_ = [[[categoryArr objectAtIndex:indexPath.section] objectForKey:@"products"] objectAtIndex:indexPath.row];
+        cell.textLabel.text = model_.name;
+        cell.detailTextLabel.text = [NSString stringWithFormat:@"%d",model_.cost];
+        return cell;
+    }
+    else
+    {
+        ProductsColTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifierRow];
+        cell.segFilter.tag = indexPath.row;
+        [cell.segFilter addTarget:self action:@selector(filerProduct:) forControlEvents:UIControlEventValueChanged];
+        [cell ConfigureCell:self IndexPath:indexPath Dictionary:[categoryArr objectAtIndex:indexPath.row]];
+        return cell;
+    }
+    
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     NSLog(@"You selected Table Cell");
+}
+
+-(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    if (tableView == _tableCollapsableView) {
+        return [[categoryArr objectAtIndex:section] objectForKey:@"category"];
+    }
+    else
+    {
+        return @"";
+    }
+    
 }
 
 #pragma mark arranging collectioncell
@@ -299,7 +378,6 @@
     ImageCropViewController *cropVC = [self.storyboard instantiateViewControllerWithIdentifier:@"ImageCropViewController"];
     [self.navigationController pushViewController:cropVC animated:YES];
 }
-
 
 
 @end

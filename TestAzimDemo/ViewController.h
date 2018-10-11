@@ -10,6 +10,9 @@
 
 @interface ViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UITableView *tableWithCollectionView;
+@property (weak, nonatomic) IBOutlet UITableView *tableCollapsableView;
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *constantTableCollection;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *constantTableCollapsable;
 @end
 
