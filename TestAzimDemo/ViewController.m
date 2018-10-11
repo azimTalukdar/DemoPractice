@@ -75,6 +75,7 @@
             [self->categoryArr addObject:dict_];
             
             [self->_tableWithCollectionView reloadData];
+            [self->_tableCollapsableView reloadData];
         }
     }];
     [dataTask resume];
@@ -104,18 +105,21 @@
             /* start special animation */
             NSLog(@"UIDeviceOrientationPortrait");
             [_tableWithCollectionView reloadData];
+            [_tableCollapsableView reloadData];
             break;
             
         case UIDeviceOrientationLandscapeLeft:
             /* start special animation */
             NSLog(@"UIDeviceOrientationLandscapeLeft");
             [_tableWithCollectionView reloadData];
+            [_tableCollapsableView reloadData];
             break;
             
         case UIDeviceOrientationLandscapeRight:
             /* start special animation */
             NSLog(@"UIDeviceOrientationLandscapeRight");
             [_tableWithCollectionView reloadData];
+            [_tableCollapsableView reloadData];
             break;
             
         default:
@@ -155,20 +159,6 @@
         _tableWithCollectionView.alpha = 0;
         _tableCollapsableView.alpha = 1;
     }
-//    [UIView animateWithDuration:3.5 animations:^{
-//        if (isDisplay) {
-//            self->_constantTableCollection.constant = 0;
-//            self->_constantTableCollapsable.constant = 0 - self->_tableCollapsableView.frame.size.width;
-//        }
-//        else
-//        {
-//            self->_constantTableCollection.constant = self->_tableWithCollectionView.frame.size.width;
-//            self->_constantTableCollapsable.constant = 0;
-//        }
-//
-//
-//    } completion:^(BOOL finished) {
-//    }];
 }
 
 #pragma mark - TableView init, Delegate and Datasource
@@ -193,7 +183,6 @@
     {
         return 1;
     }
-    
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -250,13 +239,45 @@
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
     if (tableView == _tableCollapsableView) {
-        return [[categoryArr objectAtIndex:section] objectForKey:@"category"];
+        return [[[categoryArr objectAtIndex:section] objectForKey:@"category"] uppercaseString];
     }
     else
     {
         return @"";
     }
     
+}
+
+//- (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section {
+//    // recast your view as a UITableViewHeaderFooterView
+//    UITableViewHeaderFooterView *header = (UITableViewHeaderFooterView *)view;
+//    header.contentView.backgroundColor = [UIColor colorWithHexString:@"#408000"];
+//    header.textLabel.textColor = [UIColor whiteColor];
+//    UIImageView *viewWithTag = [self.view viewWithTag:kHeaderSectionTag + section];
+//    if (viewWithTag) {
+//        [viewWithTag removeFromSuperview];
+//    }
+//    // add the arrow image
+//    CGSize headerFrame = self.view.frame.size;
+//    UIImageView *theImageView = [[UIImageView alloc] initWithFrame:CGRectMake(headerFrame.width - 32, 13, 18, 18)];
+//    theImageView.image = [UIImage imageNamed:@"Chevron-Dn-Wht"];
+//    theImageView.tag = kHeaderSectionTag + section;
+//    [header addSubview:theImageView];
+//
+//    // make headers touchable
+//    header.tag = section;
+//    UITapGestureRecognizer *headerTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(sectionHeaderWasTouched:)];
+//    [header addGestureRecognizer:headerTapGesture];
+//}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section; {
+    if (tableView == _tableCollapsableView) {
+        return 44.0;
+    }
+    else
+    {
+        return 0;
+    }
 }
 
 #pragma mark arranging collectioncell
