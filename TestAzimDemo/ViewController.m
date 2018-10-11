@@ -11,6 +11,7 @@
 #import "ProductCollectionViewCell.h"
 #import <AFNetworking.h>
 #import "ProductModel.h"
+#import "ImageCropViewController.h"
 
 
 @interface ViewController ()<UITableViewDelegate,UITableViewDataSource,UICollectionViewDelegate,UICollectionViewDataSource>
@@ -289,6 +290,14 @@
 {
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
     NSLog(@"You selected Collection Cell");
+    [self openCropVC];
+}
+
+#pragma mark - open Crop ViewController
+-(void)openCropVC
+{
+    ImageCropViewController *cropVC = [self.storyboard instantiateViewControllerWithIdentifier:@"ImageCropViewController"];
+    [self.navigationController pushViewController:cropVC animated:YES];
 }
 
 

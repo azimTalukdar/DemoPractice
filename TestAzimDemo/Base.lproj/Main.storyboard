@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -133,16 +134,49 @@
             </objects>
             <point key="canvasLocation" x="1076" y="133.5832083958021"/>
         </scene>
-        <!--View Controller-->
+        <!--Image Crop View Controller-->
         <scene sceneID="6w0-G0-ijd">
             <objects>
-                <viewController id="Zug-s1-fC2" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ImageCropViewController" id="Zug-s1-fC2" customClass="ImageCropViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3QO-Mr-vOZ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="scenary.jpeg" translatesAutoresizingMaskIntoConstraints="NO" id="Kh6-NW-sst">
+                                <rect key="frame" x="8" y="199" width="359" height="269"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="Kh6-NW-sst" secondAttribute="height" multiplier="4:3" id="zCn-Ef-Ort"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DOP-7t-XRh">
+                                <rect key="frame" x="127.5" y="617" width="120" height="44"/>
+                                <color key="backgroundColor" red="0.01176470588" green="0.66274509800000003" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="120" id="8cy-su-iOY"/>
+                                    <constraint firstAttribute="height" constant="44" id="qJV-l8-0AB"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="17"/>
+                                <state key="normal" title="CROP">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="CropPressed:" destination="Zug-s1-fC2" eventType="touchUpInside" id="Xys-GF-LBB"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="cwM-8F-eK4" firstAttribute="bottom" secondItem="DOP-7t-XRh" secondAttribute="bottom" constant="6" id="JVW-FL-Ol2"/>
+                            <constraint firstItem="Kh6-NW-sst" firstAttribute="leading" secondItem="cwM-8F-eK4" secondAttribute="leading" constant="8" id="aOl-ax-Fyf"/>
+                            <constraint firstItem="DOP-7t-XRh" firstAttribute="centerX" secondItem="3QO-Mr-vOZ" secondAttribute="centerX" id="fHa-V6-GT4"/>
+                            <constraint firstItem="cwM-8F-eK4" firstAttribute="trailing" secondItem="Kh6-NW-sst" secondAttribute="trailing" constant="8" id="hVb-CI-eN0"/>
+                            <constraint firstItem="Kh6-NW-sst" firstAttribute="centerY" secondItem="3QO-Mr-vOZ" secondAttribute="centerY" id="xtj-Px-bPr"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="cwM-8F-eK4"/>
                     </view>
+                    <connections>
+                        <outlet property="imageViewProduct" destination="Kh6-NW-sst" id="ShB-do-OXv"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rNF-Vn-cLr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -167,4 +201,7 @@
             <point key="canvasLocation" x="116" y="-564.46776611694156"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="scenary.jpeg" width="1000" height="800"/>
+    </resources>
 </document>

@@ -14,6 +14,30 @@ PODS:
   - AFNetworking/Serialization (3.2.1)
   - AFNetworking/UIKit (3.2.1):
     - AFNetworking/NSURLSession
+  - BFRImageViewer (1.2.1):
+    - DACircularProgress
+    - PINRemoteImage (~> 3.0.0-beta.12)
+  - DACircularProgress (2.3.1)
+  - FLAnimatedImage (1.0.12)
+  - PINCache (3.0.1-beta.6):
+    - PINCache/Arc-exception-safe (= 3.0.1-beta.6)
+    - PINCache/Core (= 3.0.1-beta.6)
+  - PINCache/Arc-exception-safe (3.0.1-beta.6):
+    - PINCache/Core
+  - PINCache/Core (3.0.1-beta.6):
+    - PINOperation (~> 1.1.0)
+  - PINOperation (1.1.1)
+  - PINRemoteImage (3.0.0-beta.13):
+    - PINRemoteImage/FLAnimatedImage (= 3.0.0-beta.13)
+    - PINRemoteImage/PINCache (= 3.0.0-beta.13)
+  - PINRemoteImage/Core (3.0.0-beta.13):
+    - PINOperation
+  - PINRemoteImage/FLAnimatedImage (3.0.0-beta.13):
+    - FLAnimatedImage (>= 1.0)
+    - PINRemoteImage/Core
+  - PINRemoteImage/PINCache (3.0.0-beta.13):
+    - PINCache (= 3.0.1-beta.6)
+    - PINRemoteImage/Core
   - SDWebImage (4.4.1):
     - SDWebImage/Core (= 4.4.1)
   - SDWebImage/Core (4.4.1)
@@ -21,20 +45,33 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking (~> 3.0)
+  - BFRImageViewer
   - SDWebImage (~> 4.0)
   - TOCropViewController
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - AFNetworking
+    - BFRImageViewer
+    - DACircularProgress
+    - FLAnimatedImage
+    - PINCache
+    - PINOperation
+    - PINRemoteImage
     - SDWebImage
     - TOCropViewController
 
 SPEC CHECKSUMS:
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
+  BFRImageViewer: cef9ad896eefcbe067d21c67386956bbfda4530f
+  DACircularProgress: 4dd437c0fc3da5161cb289e07ac449493d41db71
+  FLAnimatedImage: 4a0b56255d9b05f18b6dd7ee06871be5d3b89e31
+  PINCache: d195fdba255283f7e9900a55e3cced377f431f9b
+  PINOperation: a6219e6fc9db9c269eb7a7b871ac193bcf400aac
+  PINRemoteImage: d6d51c5d2adda55f1ce30c96e850b6c4ebd2856a
   SDWebImage: 47e9b5b925cbce75946c23f0c42dd19464189af4
   TOCropViewController: 6d972f2c609372312648f96758e13a7f689efbc0
 
-PODFILE CHECKSUM: 307cc56a4a6d7098742fc64b05f7da9dc209c769
+PODFILE CHECKSUM: e7450892f36aeb662e2ce19950948fb37b22c5b6
 
 COCOAPODS: 1.5.3

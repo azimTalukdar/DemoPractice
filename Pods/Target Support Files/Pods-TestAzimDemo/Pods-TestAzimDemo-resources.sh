@@ -92,9 +92,17 @@ EOM
   esac
 }
 if [[ "$CONFIGURATION" == "Debug" ]]; then
+  install_resource "${PODS_ROOT}/BFRImageViewer/BFRImageViewController/Resources/BFRImageViewerLocalizations.bundle"
+  install_resource "${PODS_ROOT}/BFRImageViewer/BFRImageViewController/Resources/cross.png"
+  install_resource "${PODS_ROOT}/BFRImageViewer/BFRImageViewController/Resources/cross@2x.png"
+  install_resource "${PODS_ROOT}/BFRImageViewer/BFRImageViewController/Resources/cross@3x.png"
   install_resource "${PODS_CONFIGURATION_BUILD_DIR}/TOCropViewController/TOCropViewControllerBundle.bundle"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
+  install_resource "${PODS_ROOT}/BFRImageViewer/BFRImageViewController/Resources/BFRImageViewerLocalizations.bundle"
+  install_resource "${PODS_ROOT}/BFRImageViewer/BFRImageViewController/Resources/cross.png"
+  install_resource "${PODS_ROOT}/BFRImageViewer/BFRImageViewController/Resources/cross@2x.png"
+  install_resource "${PODS_ROOT}/BFRImageViewer/BFRImageViewController/Resources/cross@3x.png"
   install_resource "${PODS_CONFIGURATION_BUILD_DIR}/TOCropViewController/TOCropViewControllerBundle.bundle"
 fi
 
