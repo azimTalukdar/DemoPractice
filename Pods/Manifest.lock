@@ -17,20 +17,24 @@ PODS:
   - SDWebImage (4.4.1):
     - SDWebImage/Core (= 4.4.1)
   - SDWebImage/Core (4.4.1)
+  - TOCropViewController (2.3.6)
 
 DEPENDENCIES:
   - AFNetworking (~> 3.0)
   - SDWebImage (~> 4.0)
+  - TOCropViewController
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - AFNetworking
     - SDWebImage
+    - TOCropViewController
 
 SPEC CHECKSUMS:
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
   SDWebImage: 47e9b5b925cbce75946c23f0c42dd19464189af4
+  TOCropViewController: 6d972f2c609372312648f96758e13a7f689efbc0
 
-PODFILE CHECKSUM: e9f9c43cc1bce38a7f65d2b166d70a8342f1b4b3
+PODFILE CHECKSUM: 307cc56a4a6d7098742fc64b05f7da9dc209c769
 
 COCOAPODS: 1.5.3

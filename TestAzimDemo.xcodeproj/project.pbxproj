@@ -199,6 +199,7 @@
 				5A9A5DAB216C9BB1009AC45A /* Sources */,
 				5A9A5DAC216C9BB1009AC45A /* Frameworks */,
 				5A9A5DAD216C9BB1009AC45A /* Resources */,
+				3036E272DABA5A76142A58DC /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -255,6 +256,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		3036E272DABA5A76142A58DC /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-TestAzimDemo/Pods-TestAzimDemo-resources.sh",
+				"${PODS_CONFIGURATION_BUILD_DIR}/TOCropViewController/TOCropViewControllerBundle.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/TOCropViewControllerBundle.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TestAzimDemo/Pods-TestAzimDemo-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		CE97C89BE577501B075B2769 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
