@@ -64,6 +64,7 @@
             NSMutableDictionary *dict_ = [[NSMutableDictionary alloc] init];
             [dict_ setObject:service forKey:@"category"];
             [dict_ setObject:modelProdcut.objects forKey:@"products"];
+            [dict_ setObject:[NSNumber numberWithInt:0] forKey:@"isSorted"];
             [self->categoryArr addObject:dict_];
             
             [self->_tableWithCollectionView reloadData];
@@ -168,27 +169,8 @@
     ProductsColTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifierRow];
     cell.segFilter.tag = indexPath.row;
     [cell.segFilter addTarget:self action:@selector(filerProduct:) forControlEvents:UIControlEventValueChanged];
-    [cell ConfigureCell:self IndexPath:indexPath Title:[[categoryArr objectAtIndex:indexPath.row] objectForKey:@"category"]];
+    [cell ConfigureCell:self IndexPath:indexPath Dictionary:[categoryArr objectAtIndex:indexPath.row]];
     return cell;
-}
-
--(void)filerProduct:(id)sender
-{
-    UISegmentedControl* segmentedControl = (UISegmentedControl*)sender;
-    switch (segmentedControl.selectedSegmentIndex)
-    {
-        case 0:
-            NSLog(@"Name selected");
-            break;
-            
-        case 1:
-            NSLog(@"Price selected");
-            break;
-            
-        default:
-            break;
-    }
-
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -196,6 +178,79 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     NSLog(@"You selected Table Cell");
 }
+
+#pragma mark arranging collectioncell
+
+-(void)filerProduct:(id)sender
+{
+    UISegmentedControl* segmentedControl = (UISegmentedControl*)sender;
+    switch (segmentedControl.selectedSegmentIndex)
+    {
+        case 0:
+            NSLog(@"sort by name");
+            [self sortOrderOfCell:(int)[sender tag] Name:@"name"];
+            break;
+            
+        case 1:
+            NSLog(@"sort by price");
+            [self sortOrderOfCell:(int)[sender tag] Name:@"cost"];
+            break;
+            
+        default:
+            break;
+    }
+}
+
+-(void)sortOrderOfCell:(int)rowNo Name:(NSString *)type
+{
+    NSDictionary *dict = [categoryArr objectAtIndex:rowNo];
+    NSArray *arr = [dict objectForKey:@"products"];
+    
+    NSArray *sortedArray;
+    int isSorted;
+    if ([type isEqualToString:@"name"]) {
+        sortedArray = [arr sortedArrayUsingComparator:^NSComparisonResult(ObjectModel *p1, ObjectModel *p2){
+            return [p1.name compare:p2.name];
+        }];
+        isSorted = 0;
+    }
+    else
+    {
+        sortedArray = [arr sortedArrayUsingComparator: ^(ObjectModel *p1, ObjectModel *p2) {
+            
+            if ( p1.cost < p2.cost ) {
+                return (NSComparisonResult)NSOrderedAscending;
+            } else if ( p1.cost > p2.cost ) {
+                return (NSComparisonResult)NSOrderedDescending;
+            } else {
+                return (NSComparisonResult)NSOrderedSame;
+            }
+        }];
+        isSorted = 1;
+    }
+    NSMutableDictionary *catDict = [categoryArr objectAtIndex:rowNo];
+    [catDict setObject:sortedArray forKey:@"products"];
+    [catDict setObject:[NSNumber numberWithInt:isSorted] forKey:@"isSorted"];
+    [categoryArr replaceObjectAtIndex:rowNo withObject:catDict];
+    
+    for (ObjectModel *model in sortedArray) {
+        NSLog(@"%@- %d",model.name,model.cost);
+    }
+    
+    [self.tableWithCollectionView beginUpdates];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:rowNo inSection:0];
+    NSArray *indexPaths = [[NSArray alloc] initWithObjects:indexPath, nil];
+    [self.tableWithCollectionView reloadRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationNone];
+    [self.tableWithCollectionView endUpdates];
+}
+
+- (void)reloadRowSection
+{
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+    NSArray *indexPaths = [[NSArray alloc] initWithObjects:indexPath, nil];
+    [self.tableWithCollectionView reloadRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationNone];
+}
+
 
 #pragma mark - Collection init, delegate and datasource
 

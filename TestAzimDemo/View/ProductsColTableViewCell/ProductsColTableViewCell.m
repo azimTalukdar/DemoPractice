@@ -22,9 +22,12 @@
     // Configure the view for the selected state
 }
 
--(void)ConfigureCell:(id<UICollectionViewDelegate,UICollectionViewDataSource>)dataSourceDelegate IndexPath:(NSIndexPath *)indexPath Title:(NSString *)title
+-(void)ConfigureCell:(id<UICollectionViewDelegate,UICollectionViewDataSource>)dataSourceDelegate IndexPath:(NSIndexPath *)indexPath Dictionary:(NSDictionary *)dataDict
 {
-    _lblTitle.text = [title uppercaseString];
+    _lblTitle.text = [[dataDict objectForKey:@"category"] uppercaseString];
+    int isSorted = [[dataDict objectForKey:@"isSorted"] intValue];
+    [_segFilter setSelectedSegmentIndex:isSorted];
+    
     _collectionViewProducts.delegate = dataSourceDelegate;
     _collectionViewProducts.dataSource = dataSourceDelegate;
     

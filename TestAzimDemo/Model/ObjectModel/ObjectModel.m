@@ -24,4 +24,8 @@
     return objectsArr;
 }
 
+
+- (NSComparisonResult)compareName:(ObjectModel *)otherObject {
+    return [self.name compare:otherObject.name];
+}
 @end

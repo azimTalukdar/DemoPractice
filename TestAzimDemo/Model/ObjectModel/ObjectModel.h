@@ -13,4 +13,6 @@
 @property (nonatomic, copy)   NSString *name;
 @property (nonatomic, assign) int cost;
 -(NSMutableArray *)createArray:(NSDictionary *)dict;
+
+- (NSComparisonResult)compareName:(ObjectModel *)otherObject;
 @end
