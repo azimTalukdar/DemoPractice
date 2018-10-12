@@ -109,33 +109,35 @@ static int const kHeaderSectionTag = 6900;
 
 - (void) orientationChanged:(NSNotification *)note
 {
-    UIDevice * device = note.object;
-    switch(device.orientation)
-    {
-        case UIDeviceOrientationPortrait:
-            /* start special animation */
-            NSLog(@"UIDeviceOrientationPortrait");
-            [_tableWithCollectionView reloadData];
-            [_tableCollapsableView reloadData];
-            break;
-            
-        case UIDeviceOrientationLandscapeLeft:
-            /* start special animation */
-            NSLog(@"UIDeviceOrientationLandscapeLeft");
-            [_tableWithCollectionView reloadData];
-            [_tableCollapsableView reloadData];
-            break;
-            
-        case UIDeviceOrientationLandscapeRight:
-            /* start special animation */
-            NSLog(@"UIDeviceOrientationLandscapeRight");
-            [_tableWithCollectionView reloadData];
-            [_tableCollapsableView reloadData];
-            break;
-            
-        default:
-            break;
-    };
+//    UIDevice * device = note.object;
+    [_tableWithCollectionView reloadData];
+    [_tableCollapsableView reloadData];
+//    switch(device.orientation)
+//    {
+//        case UIDeviceOrientationPortrait:
+//            /* start special animation */
+//            NSLog(@"UIDeviceOrientationPortrait");
+//            [_tableWithCollectionView reloadData];
+//            [_tableCollapsableView reloadData];
+//            break;
+//
+//        case UIDeviceOrientationLandscapeLeft:
+//            /* start special animation */
+//            NSLog(@"UIDeviceOrientationLandscapeLeft");
+//            [_tableWithCollectionView reloadData];
+//            [_tableCollapsableView reloadData];
+//            break;
+//
+//        case UIDeviceOrientationLandscapeRight:
+//            /* start special animation */
+//            NSLog(@"UIDeviceOrientationLandscapeRight");
+//            [_tableWithCollectionView reloadData];
+//            [_tableCollapsableView reloadData];
+//            break;
+//
+//        default:
+//            break;
+//    };
 }
 
 #pragma mark - Switch navigation Bar
@@ -512,7 +514,7 @@ static int const kHeaderSectionTag = 6900;
 //    [self.navigationController pushViewController:cropVC animated:YES];
     [UIView beginAnimations:@"animation" context:nil];
     [self.navigationController pushViewController: cropVC animated:NO];
-    [UIView setAnimationDuration:0.6];
+    [UIView setAnimationDuration:0.7];
     [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft forView:self.navigationController.view cache:NO];
     [UIView commitAnimations];
 }

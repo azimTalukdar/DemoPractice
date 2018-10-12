@@ -24,7 +24,28 @@
     
     self.imageViewAnimator = [BFRImageTransitionAnimator new];
     [self setUpImageView];
+    self.navigationItem.hidesBackButton = YES;
+    UIBarButtonItem *back = [[UIBarButtonItem alloc] initWithTitle:@"< BACK" style:UIBarButtonItemStylePlain target:self action:@selector(back:)];//\U000025C0\U0000FE0E
+    [self.navigationItem setLeftBarButtonItem:back];
     
+}
+
+- (IBAction)back:(id)sender {
+    [UIView transitionWithView:self.navigationController.view
+                      duration:0.5
+                       options:UIViewAnimationOptionTransitionFlipFromRight
+                    animations:^{ [self.navigationController popViewControllerAnimated:NO]; }
+                    completion:NULL];
+}
+
+-(void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+//    [UIView beginAnimations:@"animation" context:nil];
+//    [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+//    [UIView setAnimationDuration: 0.7];
+//    [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromRight forView:self.navigationController.view cache:NO];
+//    [UIView commitAnimations];
 }
 
 -(void)setUpImageView
