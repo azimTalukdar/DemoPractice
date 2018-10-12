@@ -13,6 +13,7 @@
 #import "ProductModel.h"
 #import "ImageCropViewController.h"
 
+static int const kHeaderSectionTag = 6900;
 
 @interface ViewController ()<UITableViewDelegate,UITableViewDataSource,UICollectionViewDelegate,UICollectionViewDataSource>
 {
@@ -21,7 +22,8 @@
     
 //    ProductModel *modelProdcut;
 }
-
+@property (assign) NSInteger expandedSectionHeaderNumber;
+@property (assign) UITableViewHeaderFooterView *expandedSectionHeader;
 @property (nonatomic,strong) UISwitch *switchView;
 
 @end
@@ -48,6 +50,7 @@
 -(void)initVariable
 {
     categoryArr = [[NSMutableArray alloc]  init];
+    self.expandedSectionHeaderNumber = -1;
     NSArray *serviceArr = [[NSArray alloc] initWithObjects:@"jackets",@"polos",@"shirts", nil];//@"sweatshirt"
     for (NSString *service in serviceArr) {
         [self getService:service];
@@ -188,8 +191,13 @@
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (tableView == _tableCollapsableView) {
-        NSArray *objects = [[categoryArr objectAtIndex:section] objectForKey:@"products"];
-        return objects.count;
+        if (self.expandedSectionHeaderNumber == section) {
+            NSArray *objects = [[categoryArr objectAtIndex:section] objectForKey:@"products"];
+            return objects.count;
+        } else {
+            return 0;
+        }
+        
     }
     else
     {
@@ -217,6 +225,7 @@
         ObjectModel *model_ = [[[categoryArr objectAtIndex:indexPath.section] objectForKey:@"products"] objectAtIndex:indexPath.row];
         cell.textLabel.text = model_.name;
         cell.detailTextLabel.text = [NSString stringWithFormat:@"%d",model_.cost];
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         return cell;
     }
     else
@@ -234,6 +243,9 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     NSLog(@"You selected Table Cell");
+    if (tableView == _tableCollapsableView) {
+        [self openCropVC];
+    }
 }
 
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
@@ -248,27 +260,93 @@
     
 }
 
-//- (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section {
-//    // recast your view as a UITableViewHeaderFooterView
-//    UITableViewHeaderFooterView *header = (UITableViewHeaderFooterView *)view;
-//    header.contentView.backgroundColor = [UIColor colorWithHexString:@"#408000"];
-//    header.textLabel.textColor = [UIColor whiteColor];
-//    UIImageView *viewWithTag = [self.view viewWithTag:kHeaderSectionTag + section];
-//    if (viewWithTag) {
-//        [viewWithTag removeFromSuperview];
-//    }
-//    // add the arrow image
-//    CGSize headerFrame = self.view.frame.size;
-//    UIImageView *theImageView = [[UIImageView alloc] initWithFrame:CGRectMake(headerFrame.width - 32, 13, 18, 18)];
-//    theImageView.image = [UIImage imageNamed:@"Chevron-Dn-Wht"];
-//    theImageView.tag = kHeaderSectionTag + section;
-//    [header addSubview:theImageView];
-//
-//    // make headers touchable
-//    header.tag = section;
-//    UITapGestureRecognizer *headerTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(sectionHeaderWasTouched:)];
-//    [header addGestureRecognizer:headerTapGesture];
-//}
+- (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section {
+    // recast your view as a UITableViewHeaderFooterView
+    UITableViewHeaderFooterView *header = (UITableViewHeaderFooterView *)view;
+    header.contentView.backgroundColor = [UIColor lightGrayColor];
+    header.textLabel.textColor = [UIColor whiteColor];
+    UIImageView *viewWithTag = [self.view viewWithTag:kHeaderSectionTag + section];
+    if (viewWithTag) {
+        [viewWithTag removeFromSuperview];
+    }
+    // add the arrow image
+    CGSize headerFrame = self.view.frame.size;
+    UIImageView *theImageView = [[UIImageView alloc] initWithFrame:CGRectMake(headerFrame.width - 32, 13, 18, 18)];
+    theImageView.image = [UIImage imageNamed:@"Chevron-Dn-Wht"];
+    theImageView.tag = kHeaderSectionTag + section;
+    [header addSubview:theImageView];
+
+    // make headers touchable
+    header.tag = section;
+    UITapGestureRecognizer *headerTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(sectionHeaderWasTouched:)];
+    [header addGestureRecognizer:headerTapGesture];
+}
+
+#pragma mark - Expand / Collapse Methods
+
+- (void)sectionHeaderWasTouched:(UITapGestureRecognizer *)sender {
+    UITableViewHeaderFooterView *headerView = (UITableViewHeaderFooterView *)sender.view;
+    NSInteger section = headerView.tag;
+    UIImageView *eImageView = (UIImageView *)[headerView viewWithTag:kHeaderSectionTag + section];
+    self.expandedSectionHeader = headerView;
+    
+    if (self.expandedSectionHeaderNumber == -1) {
+        self.expandedSectionHeaderNumber = section;
+        [self tableViewExpandSection:section withImage: eImageView];
+    } else {
+        if (self.expandedSectionHeaderNumber == section) {
+            [self tableViewCollapeSection:section withImage: eImageView];
+            self.expandedSectionHeader = nil;
+        } else {
+            UIImageView *cImageView  = (UIImageView *)[self.view viewWithTag:kHeaderSectionTag + self.expandedSectionHeaderNumber];
+            [self tableViewCollapeSection:self.expandedSectionHeaderNumber withImage: cImageView];
+            [self tableViewExpandSection:section withImage: eImageView];
+        }
+    }
+}
+
+- (void)tableViewCollapeSection:(NSInteger)section withImage:(UIImageView *)imageView {
+    NSArray *sectionData = [[categoryArr objectAtIndex:section] objectForKey:@"products"];
+    
+    self.expandedSectionHeaderNumber = -1;
+    if (sectionData.count == 0) {
+        return;
+    } else {
+        [UIView animateWithDuration:0.4 animations:^{
+            imageView.transform = CGAffineTransformMakeRotation((0.0 * M_PI) / 180.0);
+        }];
+        NSMutableArray *arrayOfIndexPaths = [NSMutableArray array];
+        for (int i=0; i< sectionData.count; i++) {
+            NSIndexPath *index = [NSIndexPath indexPathForRow:i inSection:section];
+            [arrayOfIndexPaths addObject:index];
+        }
+        [self.tableCollapsableView beginUpdates];
+        [self.tableCollapsableView deleteRowsAtIndexPaths:arrayOfIndexPaths withRowAnimation: UITableViewRowAnimationFade];
+        [self.tableCollapsableView endUpdates];
+    }
+}
+
+- (void)tableViewExpandSection:(NSInteger)section withImage:(UIImageView *)imageView {
+    NSArray *sectionData = [[categoryArr objectAtIndex:section] objectForKey:@"products"];
+    
+    if (sectionData.count == 0) {
+        self.expandedSectionHeaderNumber = -1;
+        return;
+    } else {
+        [UIView animateWithDuration:0.4 animations:^{
+            imageView.transform = CGAffineTransformMakeRotation((180.0 * M_PI) / 180.0);
+        }];
+        NSMutableArray *arrayOfIndexPaths = [NSMutableArray array];
+        for (int i=0; i< sectionData.count; i++) {
+            NSIndexPath *index = [NSIndexPath indexPathForRow:i inSection:section];
+            [arrayOfIndexPaths addObject:index];
+        }
+        self.expandedSectionHeaderNumber = section;
+        [self.tableCollapsableView beginUpdates];
+        [self.tableCollapsableView insertRowsAtIndexPaths:arrayOfIndexPaths withRowAnimation: UITableViewRowAnimationFade];
+        [self.tableCollapsableView endUpdates];
+    }
+}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section; {
     if (tableView == _tableCollapsableView) {
