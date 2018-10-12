@@ -17,7 +17,7 @@
 {
     [_imgProduct sd_setImageWithURL:[NSURL URLWithString:@"https://d3u4dhauhww2a1.cloudfront.net/product-media/20X/256/256/20-40532640pjpg1.jpg"]
                  placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
-    _lblTitle.text = [NSString stringWithFormat:@"%@ (%ld)",model.name,(long)model.cost];
+    _lblTitle.text = [NSString stringWithFormat:@"%@\n(%ld)",model.name,(long)model.cost];
 }
 
 @end

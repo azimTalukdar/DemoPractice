@@ -32,6 +32,7 @@
     _collectionViewProducts.dataSource = dataSourceDelegate;
     
     _collectionViewProducts.tag = indexPath.row;
+//    _collectionViewProducts.dragDelegate = dataSourceDelegate
     
     [_collectionViewProducts reloadData];
     

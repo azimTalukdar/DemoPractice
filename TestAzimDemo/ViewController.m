@@ -15,11 +15,12 @@
 
 static int const kHeaderSectionTag = 6900;
 
-@interface ViewController ()<UITableViewDelegate,UITableViewDataSource,UICollectionViewDelegate,UICollectionViewDataSource>
+@interface ViewController ()<UITableViewDelegate,UITableViewDataSource,UICollectionViewDelegate,UICollectionViewDataSource,UIGestureRecognizerDelegate>
 {
     NSMutableArray *categoryArr;
     NSArray *productsArr;
-    
+    int serviceNo;
+    NSArray *serviceArr;
 //    ProductModel *modelProdcut;
 }
 @property (assign) NSInteger expandedSectionHeaderNumber;
@@ -51,10 +52,11 @@ static int const kHeaderSectionTag = 6900;
 {
     categoryArr = [[NSMutableArray alloc]  init];
     self.expandedSectionHeaderNumber = -1;
-    NSArray *serviceArr = [[NSArray alloc] initWithObjects:@"jackets",@"polos",@"shirts", nil];//@"sweatshirt"
-    for (NSString *service in serviceArr) {
-        [self getService:service];
-    }
+    serviceNo = 0;
+    serviceArr = [[NSArray alloc] initWithObjects:@"jackets",@"polos",@"shirts", nil];//@"sweatshirt"
+
+    [self getService:serviceArr[serviceNo]];
+    
 }
 
 -(void)getService:(NSString *)service
@@ -80,6 +82,12 @@ static int const kHeaderSectionTag = 6900;
             [self->_tableWithCollectionView reloadData];
             [self->_tableCollapsableView reloadData];
         }
+        self->serviceNo++;
+        if (self->serviceNo < self->serviceArr.count) {
+            [self getService:self->serviceArr[self->serviceNo]];
+        }
+        
+        
     }];
     [dataTask resume];
 }
@@ -358,7 +366,7 @@ static int const kHeaderSectionTag = 6900;
     }
 }
 
-#pragma mark arranging collectioncell
+#pragma mark Arranging collectioncell
 
 -(void)filerProduct:(id)sender
 {
@@ -412,10 +420,15 @@ static int const kHeaderSectionTag = 6900;
     [catDict setObject:[NSNumber numberWithInt:isSorted] forKey:@"isSorted"];
     [categoryArr replaceObjectAtIndex:rowNo withObject:catDict];
     
-    for (ObjectModel *model in sortedArray) {
-        NSLog(@"%@- %d",model.name,model.cost);
-    }
+//    for (ObjectModel *model in sortedArray) {
+//        NSLog(@"%@- %d",model.name,model.cost);
+//    }
     
+    [self reloadRowSection:rowNo];
+}
+
+- (void)reloadRowSection:(int)rowNo
+{
     [self.tableWithCollectionView beginUpdates];
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:rowNo inSection:0];
     NSArray *indexPaths = [[NSArray alloc] initWithObjects:indexPath, nil];
@@ -423,15 +436,8 @@ static int const kHeaderSectionTag = 6900;
     [self.tableWithCollectionView endUpdates];
 }
 
-- (void)reloadRowSection
-{
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-    NSArray *indexPaths = [[NSArray alloc] initWithObjects:indexPath, nil];
-    [self.tableWithCollectionView reloadRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationNone];
-}
 
-
-#pragma mark - Collection init, delegate and datasource
+#pragma mark - Collection delegate and datasource
 
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
@@ -452,6 +458,34 @@ static int const kHeaderSectionTag = 6900;
     CGSize size_ = collectionView.frame.size;
     
     return CGSizeMake(size_.width/itemsCols, size_.height/itemsRows);
+}
+
+- (void)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout didEndDraggingItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    [self reloadRowSection:(int)collectionView.tag];
+}
+
+- (void)collectionView:(UICollectionView *)collectionView itemAtIndexPath:(NSIndexPath *)fromIndexPath didMoveToIndexPath:(NSIndexPath *)toIndexPath
+{
+    ObjectModel *A = [[[categoryArr objectAtIndex:collectionView.tag] objectForKey:@"products"] objectAtIndex:fromIndexPath.item];
+    ObjectModel *B = [[[categoryArr objectAtIndex:collectionView.tag] objectForKey:@"products"] objectAtIndex:toIndexPath.item];
+    NSMutableArray *sortedArr = [[[categoryArr objectAtIndex:collectionView.tag] objectForKey:@"produtcs"] mutableCopy];
+    [sortedArr replaceObjectAtIndex:fromIndexPath.item withObject:B];
+    [sortedArr replaceObjectAtIndex:toIndexPath.item withObject:A];
+
+    NSMutableDictionary *catDict = [categoryArr objectAtIndex:collectionView.tag];
+    [catDict setObject:sortedArr forKey:@"products"];
+    [categoryArr replaceObjectAtIndex:collectionView.tag withObject:catDict];
+}
+
+- (BOOL)collectionView:(UICollectionView *)collectionView itemAtIndexPath:(NSIndexPath *)fromIndexPath canMoveToIndexPath:(NSIndexPath *)toIndexPath
+{
+    return YES;
+}
+
+- (BOOL)collectionView:(UICollectionView *)collectionView canMoveItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    return YES;
 }
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -475,7 +509,12 @@ static int const kHeaderSectionTag = 6900;
 -(void)openCropVC
 {
     ImageCropViewController *cropVC = [self.storyboard instantiateViewControllerWithIdentifier:@"ImageCropViewController"];
-    [self.navigationController pushViewController:cropVC animated:YES];
+//    [self.navigationController pushViewController:cropVC animated:YES];
+    [UIView beginAnimations:@"animation" context:nil];
+    [self.navigationController pushViewController: cropVC animated:NO];
+    [UIView setAnimationDuration:0.6];
+    [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft forView:self.navigationController.view cache:NO];
+    [UIView commitAnimations];
 }
 
 
