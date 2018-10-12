@@ -1,0 +1,1 @@
+../../../BFRImageViewer/BFRImageViewController/BFRImageViewerLocalizations.h

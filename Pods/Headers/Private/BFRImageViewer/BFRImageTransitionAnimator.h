@@ -1,0 +1,1 @@
+../../../BFRImageViewer/BFRImageViewController/BFRImageTransitionAnimator.h
