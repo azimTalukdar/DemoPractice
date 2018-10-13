@@ -12,7 +12,11 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableWithCollectionView;
 @property (weak, nonatomic) IBOutlet UITableView *tableCollapsableView;
 
+@property (nonatomic,strong) UICollectionView *crntCollectionView;
+
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *constantTableCollection;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *constantTableCollapsable;
+
+
 @end
 

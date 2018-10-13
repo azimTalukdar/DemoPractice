@@ -15,7 +15,7 @@
 
 static int const kHeaderSectionTag = 6900;
 
-@interface ViewController ()<UITableViewDelegate,UITableViewDataSource,UICollectionViewDelegate,UICollectionViewDataSource,UIGestureRecognizerDelegate>
+@interface ViewController ()<UITableViewDelegate,UITableViewDataSource,UICollectionViewDelegate,UICollectionViewDataSource>
 {
     NSMutableArray *categoryArr;
     NSArray *productsArr;
@@ -488,6 +488,23 @@ static int const kHeaderSectionTag = 6900;
 - (BOOL)collectionView:(UICollectionView *)collectionView canMoveItemAtIndexPath:(NSIndexPath *)indexPath
 {
     return YES;
+}
+
+-(void)collectionView:(UICollectionView *)collectionView moveItemAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath
+{
+    NSLog(@"from %ld",(long)sourceIndexPath.item);
+    NSLog(@"to %ld",(long)destinationIndexPath.item);
+}
+
+-(void)handleLongGesture:(UILongPressGestureRecognizer *)gesture
+{
+    if (gesture.state != UIGestureRecognizerStateEnded) {
+        return;
+    }
+    NSLog(@"handleLongGesture handleLongGesture in viewController");
+    if (gesture.state == UIGestureRecognizerStateBegan) {
+        
+    }
 }
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
