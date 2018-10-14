@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		18E3261421734893008A0BC3 /* ReadMe.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 18E3261321734893008A0BC3 /* ReadMe.rtf */; };
 		5A9A5DB4216C9BB1009AC45A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A9A5DB3216C9BB1009AC45A /* AppDelegate.m */; };
 		5A9A5DB7216C9BB1009AC45A /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A9A5DB6216C9BB1009AC45A /* ViewController.m */; };
 		5A9A5DBA216C9BB1009AC45A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5A9A5DB8216C9BB1009AC45A /* Main.storyboard */; };
@@ -24,6 +25,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		18E3261321734893008A0BC3 /* ReadMe.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = ReadMe.rtf; sourceTree = "<group>"; };
 		54865580CE3740ED26FA603E /* Pods-TestAzimDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TestAzimDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TestAzimDemo/Pods-TestAzimDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		5A9A5DAF216C9BB1009AC45A /* TestAzimDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestAzimDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A9A5DB2216C9BB1009AC45A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -69,6 +71,7 @@
 		5A9A5DA6216C9BB1009AC45A = {
 			isa = PBXGroup;
 			children = (
+				18E3261321734893008A0BC3 /* ReadMe.rtf */,
 				5A9A5DB1216C9BB1009AC45A /* TestAzimDemo */,
 				5A9A5DB0216C9BB1009AC45A /* Products */,
 				E180AE2A19B2B9EBDF4EBC1D /* Pods */,
@@ -274,6 +277,7 @@
 				5A9A5DBF216C9BB5009AC45A /* LaunchScreen.storyboard in Resources */,
 				5AF3C69B216F542000BAAD0C /* scenary.jpeg in Resources */,
 				5A9A5DBC216C9BB5009AC45A /* Assets.xcassets in Resources */,
+				18E3261421734893008A0BC3 /* ReadMe.rtf in Resources */,
 				5A9A5DBA216C9BB1009AC45A /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
