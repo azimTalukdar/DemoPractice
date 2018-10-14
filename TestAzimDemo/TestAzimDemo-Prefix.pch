@@ -9,6 +9,15 @@
 #ifndef TestAzimDemo_Prefix_pch
 #define TestAzimDemo_Prefix_pch
 
+#define FYND_COLOR_PINK1 [UIColor colorWithRed:243.0/255.0 green:65.0/255.0 blue:135.0/255.0 alpha:1.0]
+#define JACKET_URL @"https://d2zv4gzhlr4ud6.cloudfront.net/media/pictures/tagged_items/270x0/626_SG06171099/1_1509099246282.jpg"
+#define POLO_URL @"https://d2zv4gzhlr4ud6.cloudfront.net/media/pictures/tagged_items/270x0/572_WHALFHENLEYNAVY/1_1508241578235.jpg"
+#define SHIRT_URL @"https://d2zv4gzhlr4ud6.cloudfront.net/media/pictures/tagged_items/540x0/514_VL1214/1_1517561534300.jpg"
+
+#define CATEGORY_KEY @"category"
+#define PRODUCTS_KEY @"products"
+#define IS_SORTED_KEY @"isSorted"
+
 // Include any system framework and library headers here that should be included in all compilation units.
 // You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
 

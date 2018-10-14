@@ -25,8 +25,8 @@
 
 -(void)ConfigureCell:(id<UICollectionViewDelegate,UICollectionViewDataSource>)dataSourceDelegate IndexPath:(NSIndexPath *)indexPath Dictionary:(NSDictionary *)dataDict
 {
-    _lblTitle.text = [[dataDict objectForKey:@"category"] uppercaseString];
-    int isSorted = [[dataDict objectForKey:@"isSorted"] intValue];
+    _lblTitle.text = [[dataDict objectForKey:CATEGORY_KEY] uppercaseString];
+    int isSorted = [[dataDict objectForKey:IS_SORTED_KEY] intValue];
     [_segFilter setSelectedSegmentIndex:isSorted];
     
     _collectionViewProducts.dragInteractionEnabled = YES;

@@ -13,11 +13,6 @@
 #import "ProductModel.h"
 #import "ImageCropViewController.h"
 
-#define FYND_COLOR_PINK1 [UIColor colorWithRed:243.0/255.0 green:65.0/255.0 blue:135.0/255.0 alpha:1.0]
-#define JACKET_URL @"https://d2zv4gzhlr4ud6.cloudfront.net/media/pictures/tagged_items/270x0/626_SG06171099/1_1509099246282.jpg"
-#define POLO_URL @"https://d2zv4gzhlr4ud6.cloudfront.net/media/pictures/tagged_items/270x0/572_WHALFHENLEYNAVY/1_1508241578235.jpg"
-#define SHIRT_URL @"https://d2zv4gzhlr4ud6.cloudfront.net/media/pictures/tagged_items/540x0/514_VL1214/1_1517561534300.jpg"
-
 static int const kHeaderSectionTag = 6900;
 
 @interface ViewController ()<UITableViewDelegate,UITableViewDataSource,UICollectionViewDelegate,UICollectionViewDataSource>
@@ -40,7 +35,7 @@ static int const kHeaderSectionTag = 6900;
     [super viewDidLoad];
     [self addSpashImage];
     // Do any additional setup after loading the view, typically from a nib.
-    self.navigationController.topViewController.title = @"PRODUCTS";
+    self.navigationController.topViewController.title = @"PRODUCTSs";
     
     [self initVariable];
     [self addSwitchBarButton];
@@ -89,9 +84,9 @@ static int const kHeaderSectionTag = 6900;
             NSLog(@"%@ url succeded",service);
             ProductModel *modelProdcut = [[ProductModel alloc]  initWithData:responseObject];
             NSMutableDictionary *dict_ = [[NSMutableDictionary alloc] init];
-            [dict_ setObject:service forKey:@"category"];
-            [dict_ setObject:modelProdcut.objects forKey:@"products"];
-            [dict_ setObject:[NSNumber numberWithInt:0] forKey:@"isSorted"];
+            [dict_ setObject:service forKey:CATEGORY_KEY];
+            [dict_ setObject:modelProdcut.objects forKey:PRODUCTS_KEY];
+            [dict_ setObject:[NSNumber numberWithInt:0] forKey:IS_SORTED_KEY];
             [self->categoryArr addObject:dict_];
             
             [self->_tableWithCollectionView reloadData];
@@ -206,7 +201,7 @@ static int const kHeaderSectionTag = 6900;
 {
     if (tableView == _tableCollapsableView) {
         if (self.expandedSectionHeaderNumber == section) {
-            NSArray *objects = [[categoryArr objectAtIndex:section] objectForKey:@"products"];
+            NSArray *objects = [[categoryArr objectAtIndex:section] objectForKey:PRODUCTS_KEY];
             return objects.count;
         } else {
             return 0;
@@ -236,7 +231,7 @@ static int const kHeaderSectionTag = 6900;
     static NSString *identifierRowNormal = @"defaultCell";//
     if (tableView == _tableCollapsableView) {
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifierRowNormal];
-        ObjectModel *model_ = [[[categoryArr objectAtIndex:indexPath.section] objectForKey:@"products"] objectAtIndex:indexPath.row];
+        ObjectModel *model_ = [[[categoryArr objectAtIndex:indexPath.section] objectForKey:PRODUCTS_KEY] objectAtIndex:indexPath.row];
         cell.textLabel.text = model_.name;
         cell.detailTextLabel.text = [NSString stringWithFormat:@"%d",model_.cost];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -265,7 +260,7 @@ static int const kHeaderSectionTag = 6900;
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
     if (tableView == _tableCollapsableView) {
-        return [[[categoryArr objectAtIndex:section] objectForKey:@"category"] uppercaseString];
+        return [[[categoryArr objectAtIndex:section] objectForKey:CATEGORY_KEY] uppercaseString];
     }
     else
     {
@@ -320,7 +315,7 @@ static int const kHeaderSectionTag = 6900;
 }
 
 - (void)tableViewCollapeSection:(NSInteger)section withImage:(UIImageView *)imageView {
-    NSArray *sectionData = [[categoryArr objectAtIndex:section] objectForKey:@"products"];
+    NSArray *sectionData = [[categoryArr objectAtIndex:section] objectForKey:PRODUCTS_KEY];
     
     self.expandedSectionHeaderNumber = -1;
     if (sectionData.count == 0) {
@@ -341,7 +336,7 @@ static int const kHeaderSectionTag = 6900;
 }
 
 - (void)tableViewExpandSection:(NSInteger)section withImage:(UIImageView *)imageView {
-    NSArray *sectionData = [[categoryArr objectAtIndex:section] objectForKey:@"products"];
+    NSArray *sectionData = [[categoryArr objectAtIndex:section] objectForKey:PRODUCTS_KEY];
     
     if (sectionData.count == 0) {
         self.expandedSectionHeaderNumber = -1;
@@ -397,7 +392,7 @@ static int const kHeaderSectionTag = 6900;
 -(void)sortOrderOfCell:(int)rowNo Name:(NSString *)type
 {
     NSDictionary *dict = [categoryArr objectAtIndex:rowNo];
-    NSArray *arr = [dict objectForKey:@"products"];
+    NSArray *arr = [dict objectForKey:PRODUCTS_KEY];
     
     NSArray *sortedArray;
     int isSorted;
@@ -422,8 +417,8 @@ static int const kHeaderSectionTag = 6900;
         isSorted = 1;
     }
     NSMutableDictionary *catDict = [categoryArr objectAtIndex:rowNo];
-    [catDict setObject:sortedArray forKey:@"products"];
-    [catDict setObject:[NSNumber numberWithInt:isSorted] forKey:@"isSorted"];
+    [catDict setObject:sortedArray forKey:PRODUCTS_KEY];
+    [catDict setObject:[NSNumber numberWithInt:isSorted] forKey:IS_SORTED_KEY];
     [categoryArr replaceObjectAtIndex:rowNo withObject:catDict];
     
 //    for (ObjectModel *model in sortedArray) {
@@ -453,7 +448,7 @@ static int const kHeaderSectionTag = 6900;
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     NSDictionary *dict = [categoryArr objectAtIndex:collectionView.tag];
-    return [(NSArray *)[dict objectForKey:@"products"] count];
+    return [(NSArray *)[dict objectForKey:PRODUCTS_KEY] count];
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -468,20 +463,13 @@ static int const kHeaderSectionTag = 6900;
 
 - (void)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout didEndDraggingItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    NSLog(@"didEndDraggingItemAtIndexPath %ld",indexPath.item);
     [self reloadRowSection:(int)collectionView.tag];
 }
 
 - (void)collectionView:(UICollectionView *)collectionView itemAtIndexPath:(NSIndexPath *)fromIndexPath didMoveToIndexPath:(NSIndexPath *)toIndexPath
 {
-    ObjectModel *A = [[[categoryArr objectAtIndex:collectionView.tag] objectForKey:@"products"] objectAtIndex:fromIndexPath.item];
-    ObjectModel *B = [[[categoryArr objectAtIndex:collectionView.tag] objectForKey:@"products"] objectAtIndex:toIndexPath.item];
-    NSMutableArray *sortedArr = [[[categoryArr objectAtIndex:collectionView.tag] objectForKey:@"produtcs"] mutableCopy];
-    [sortedArr replaceObjectAtIndex:fromIndexPath.item withObject:B];
-    [sortedArr replaceObjectAtIndex:toIndexPath.item withObject:A];
-
-    NSMutableDictionary *catDict = [categoryArr objectAtIndex:collectionView.tag];
-    [catDict setObject:sortedArr forKey:@"products"];
-    [categoryArr replaceObjectAtIndex:collectionView.tag withObject:catDict];
+    NSLog(@"didMoveToIndexPath %ld - %ld",fromIndexPath.item,toIndexPath.item);
 }
 
 - (BOOL)collectionView:(UICollectionView *)collectionView itemAtIndexPath:(NSIndexPath *)fromIndexPath canMoveToIndexPath:(NSIndexPath *)toIndexPath
@@ -498,6 +486,18 @@ static int const kHeaderSectionTag = 6900;
 {
     NSLog(@"from %ld",(long)sourceIndexPath.item);
     NSLog(@"to %ld",(long)destinationIndexPath.item);
+    NSLog(@"collection tag %ld",collectionView.tag);
+    
+    ObjectModel *A = [[[categoryArr objectAtIndex:collectionView.tag] objectForKey:PRODUCTS_KEY] objectAtIndex:sourceIndexPath.item];
+    ObjectModel *B = [[[categoryArr objectAtIndex:collectionView.tag] objectForKey:PRODUCTS_KEY] objectAtIndex:destinationIndexPath.item];
+    
+    NSMutableArray *sortedArr = [[[categoryArr objectAtIndex:collectionView.tag] objectForKey:PRODUCTS_KEY] mutableCopy];
+    [sortedArr replaceObjectAtIndex:sourceIndexPath.item withObject:B];
+    [sortedArr replaceObjectAtIndex:destinationIndexPath.item withObject:A];
+    
+    NSMutableDictionary *catDict = [categoryArr objectAtIndex:collectionView.tag];
+    [catDict setObject:sortedArr forKey:PRODUCTS_KEY];
+    [categoryArr replaceObjectAtIndex:collectionView.tag withObject:catDict];
 }
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -505,7 +505,7 @@ static int const kHeaderSectionTag = 6900;
     static NSString *identifierCol = @"ProductCollectionViewCell";
     ProductCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifierCol forIndexPath:indexPath];
     NSDictionary *dict = [categoryArr objectAtIndex:collectionView.tag];
-    ObjectModel *model_ = [[dict objectForKey:@"products"] objectAtIndex:indexPath.item];
+    ObjectModel *model_ = [[dict objectForKey:PRODUCTS_KEY] objectAtIndex:indexPath.item];
     [cell configureCell:model_ ULR:[imageProductArr objectAtIndex:collectionView.tag]];
     return cell;
 }

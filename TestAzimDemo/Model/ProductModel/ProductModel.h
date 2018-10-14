@@ -10,17 +10,6 @@
 #import "ObjectModel.h"
 #import "MetaModel.h"
 
-//@interface ATMeta : NSObject
-//@property (nonatomic, assign) NSInteger count;
-//@property (nonatomic, assign) BOOL isSuccess;
-//@end
-//
-//@interface ATObject : NSObject
-//@property (nonatomic, assign) NSInteger sku;
-//@property (nonatomic, copy)   NSString *name;
-//@property (nonatomic, assign) NSInteger cost;
-//@end
-
 @interface ProductModel : NSObject
 @property (nonatomic, strong) MetaModel *meta;
 @property (nonatomic, copy)   NSArray<ObjectModel *> *objects;
