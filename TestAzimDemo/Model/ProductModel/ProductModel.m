@@ -7,9 +7,6 @@
 //
 
 #import "ProductModel.h"
-
-
-
 @implementation ProductModel
 
 

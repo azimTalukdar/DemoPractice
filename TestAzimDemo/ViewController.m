@@ -461,22 +461,6 @@ static int const kHeaderSectionTag = 6900;
     return CGSizeMake(size_.width/itemsCols-4, size_.height/itemsRows);
 }
 
-- (void)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout didEndDraggingItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    NSLog(@"didEndDraggingItemAtIndexPath %ld",indexPath.item);
-    [self reloadRowSection:(int)collectionView.tag];
-}
-
-- (void)collectionView:(UICollectionView *)collectionView itemAtIndexPath:(NSIndexPath *)fromIndexPath didMoveToIndexPath:(NSIndexPath *)toIndexPath
-{
-    NSLog(@"didMoveToIndexPath %ld - %ld",fromIndexPath.item,toIndexPath.item);
-}
-
-- (BOOL)collectionView:(UICollectionView *)collectionView itemAtIndexPath:(NSIndexPath *)fromIndexPath canMoveToIndexPath:(NSIndexPath *)toIndexPath
-{
-    return YES;
-}
-
 - (BOOL)collectionView:(UICollectionView *)collectionView canMoveItemAtIndexPath:(NSIndexPath *)indexPath
 {
     return YES;
@@ -489,11 +473,21 @@ static int const kHeaderSectionTag = 6900;
     NSLog(@"collection tag %ld",collectionView.tag);
     
     ObjectModel *A = [[[categoryArr objectAtIndex:collectionView.tag] objectForKey:PRODUCTS_KEY] objectAtIndex:sourceIndexPath.item];
-    ObjectModel *B = [[[categoryArr objectAtIndex:collectionView.tag] objectForKey:PRODUCTS_KEY] objectAtIndex:destinationIndexPath.item];
+//    ObjectModel *B = [[[categoryArr objectAtIndex:collectionView.tag] objectForKey:PRODUCTS_KEY] objectAtIndex:destinationIndexPath.item];
     
     NSMutableArray *sortedArr = [[[categoryArr objectAtIndex:collectionView.tag] objectForKey:PRODUCTS_KEY] mutableCopy];
-    [sortedArr replaceObjectAtIndex:sourceIndexPath.item withObject:B];
-    [sortedArr replaceObjectAtIndex:destinationIndexPath.item withObject:A];
+    for (int i = (int)sourceIndexPath.item; i<=destinationIndexPath.item; i++) {
+        if (i == destinationIndexPath.item)
+        {
+            [sortedArr replaceObjectAtIndex:i withObject:A];
+        }
+        else
+        {
+            [sortedArr replaceObjectAtIndex:i withObject:[sortedArr objectAtIndex:i+1]];
+        }
+    }
+//    [sortedArr replaceObjectAtIndex:sourceIndexPath.item withObject:B];
+//    [sortedArr replaceObjectAtIndex:destinationIndexPath.item withObject:A];
     
     NSMutableDictionary *catDict = [categoryArr objectAtIndex:collectionView.tag];
     [catDict setObject:sortedArr forKey:PRODUCTS_KEY];
