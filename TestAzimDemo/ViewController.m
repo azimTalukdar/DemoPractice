@@ -476,16 +476,25 @@ static int const kHeaderSectionTag = 6900;
 //    ObjectModel *B = [[[categoryArr objectAtIndex:collectionView.tag] objectForKey:PRODUCTS_KEY] objectAtIndex:destinationIndexPath.item];
     
     NSMutableArray *sortedArr = [[[categoryArr objectAtIndex:collectionView.tag] objectForKey:PRODUCTS_KEY] mutableCopy];
-    for (int i = (int)sourceIndexPath.item; i<=destinationIndexPath.item; i++) {
-        if (i == destinationIndexPath.item)
-        {
-            [sortedArr replaceObjectAtIndex:i withObject:A];
-        }
-        else
-        {
-            [sortedArr replaceObjectAtIndex:i withObject:[sortedArr objectAtIndex:i+1]];
+    if (destinationIndexPath.item > sourceIndexPath.item)
+    {
+        for (int i = (int)sourceIndexPath.item; i<=destinationIndexPath.item; i++) {
+            if (i == destinationIndexPath.item)
+                [sortedArr replaceObjectAtIndex:i withObject:A];
+            else
+                [sortedArr replaceObjectAtIndex:i withObject:[sortedArr objectAtIndex:i+1]];
         }
     }
+    else
+    {
+        for (int i = (int)sourceIndexPath.item; i>=destinationIndexPath.item; i--) {
+            if (i == destinationIndexPath.item)
+                [sortedArr replaceObjectAtIndex:i withObject:A];
+            else
+                [sortedArr replaceObjectAtIndex:i withObject:[sortedArr objectAtIndex:i-1]];
+        }
+    }
+    
 //    [sortedArr replaceObjectAtIndex:sourceIndexPath.item withObject:B];
 //    [sortedArr replaceObjectAtIndex:destinationIndexPath.item withObject:A];
     
