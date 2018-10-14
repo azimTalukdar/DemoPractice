@@ -203,7 +203,7 @@
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DOP-7t-XRh">
                                 <rect key="frame" x="127.5" y="617" width="120" height="44"/>
-                                <color key="backgroundColor" red="0.01176470588" green="0.66274509800000003" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.93030864000000002" green="0.2605381906" blue="0.53984940049999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="120" id="8cy-su-iOY"/>
                                     <constraint firstAttribute="height" constant="44" id="qJV-l8-0AB"/>

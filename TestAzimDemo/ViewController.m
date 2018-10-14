@@ -463,7 +463,7 @@ static int const kHeaderSectionTag = 6900;
     
     CGSize size_ = collectionView.frame.size;
     
-    return CGSizeMake(size_.width/itemsCols, size_.height/itemsRows);
+    return CGSizeMake(size_.width/itemsCols-4, size_.height/itemsRows);
 }
 
 - (void)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout didEndDraggingItemAtIndexPath:(NSIndexPath *)indexPath
@@ -498,17 +498,6 @@ static int const kHeaderSectionTag = 6900;
 {
     NSLog(@"from %ld",(long)sourceIndexPath.item);
     NSLog(@"to %ld",(long)destinationIndexPath.item);
-}
-
--(void)handleLongGesture:(UILongPressGestureRecognizer *)gesture
-{
-    if (gesture.state != UIGestureRecognizerStateEnded) {
-        return;
-    }
-    NSLog(@"handleLongGesture handleLongGesture in viewController");
-    if (gesture.state == UIGestureRecognizerStateBegan) {
-        
-    }
 }
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath

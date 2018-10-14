@@ -14,8 +14,7 @@
     [super awakeFromNib];
     // Initialization code
     self.selectionStyle = UITableViewCellSelectionStyleNone;
-    UILongPressGestureRecognizer *longPressGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongGesture:)];
-    [_collectionViewProducts addGestureRecognizer:longPressGesture];
+    
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -24,7 +23,7 @@
     // Configure the view for the selected state
 }
 
--(void)ConfigureCell:(id<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDragDelegate>)dataSourceDelegate IndexPath:(NSIndexPath *)indexPath Dictionary:(NSDictionary *)dataDict
+-(void)ConfigureCell:(id<UICollectionViewDelegate,UICollectionViewDataSource>)dataSourceDelegate IndexPath:(NSIndexPath *)indexPath Dictionary:(NSDictionary *)dataDict
 {
     _lblTitle.text = [[dataDict objectForKey:@"category"] uppercaseString];
     int isSorted = [[dataDict objectForKey:@"isSorted"] intValue];
@@ -34,8 +33,8 @@
     
     _collectionViewProducts.delegate = dataSourceDelegate;
     _collectionViewProducts.dataSource = dataSourceDelegate;
-    _collectionViewProducts.dragDelegate = dataSourceDelegate;
-    
+    UILongPressGestureRecognizer *longPressGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongGesture:)];
+    [_collectionViewProducts addGestureRecognizer:longPressGesture];
     
     _collectionViewProducts.tag = indexPath.row;
 //    _collectionViewProducts.dragDelegate = dataSourceDelegate
@@ -46,9 +45,11 @@
 
 -(void)handleLongGesture:(UILongPressGestureRecognizer *)gesture
 {
-    if (gesture.state != UIGestureRecognizerStateEnded) {
-        return;
-    }
+    
+//    if (gesture.state != UIGestureRecognizerStateEnded) {
+//        return;
+//    }
+//    NSLog(@"Long gesture initiated");
     CGPoint point_ = [gesture locationInView:_collectionViewProducts];
     switch (gesture.state) {
         case UIGestureRecognizerStateBegan:
