@@ -2,7 +2,7 @@
 //  ProductModel.h
 //  TestAzimDemo
 //
-//  Created by GENEXT-PC on 10/10/18.
+//  Created by AZIM-PC on 10/10/18.
 //  Copyright © 2018 Azim. All rights reserved.
 //
 

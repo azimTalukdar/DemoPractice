@@ -2,7 +2,7 @@
 //  ImageCropViewController.h
 //  TestAzimDemo
 //
-//  Created by GENEXT-PC on 11/10/18.
+//  Created by AZIM-PC on 11/10/18.
 //  Copyright © 2018 Azim. All rights reserved.
 //
 
