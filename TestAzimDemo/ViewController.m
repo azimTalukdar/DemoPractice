@@ -13,6 +13,11 @@
 #import "ProductModel.h"
 #import "ImageCropViewController.h"
 
+#define FYND_COLOR_PINK1 [UIColor colorWithRed:243.0/255.0 green:65.0/255.0 blue:135.0/255.0 alpha:1.0]
+#define JACKET_URL @"https://d2zv4gzhlr4ud6.cloudfront.net/media/pictures/tagged_items/270x0/626_SG06171099/1_1509099246282.jpg"
+#define POLO_URL @"https://d2zv4gzhlr4ud6.cloudfront.net/media/pictures/tagged_items/270x0/572_WHALFHENLEYNAVY/1_1508241578235.jpg"
+#define SHIRT_URL @"https://d2zv4gzhlr4ud6.cloudfront.net/media/pictures/tagged_items/540x0/514_VL1214/1_1517561534300.jpg"
+
 static int const kHeaderSectionTag = 6900;
 
 @interface ViewController ()<UITableViewDelegate,UITableViewDataSource,UICollectionViewDelegate,UICollectionViewDataSource>
@@ -21,7 +26,7 @@ static int const kHeaderSectionTag = 6900;
     NSArray *productsArr;
     int serviceNo;
     NSArray *serviceArr;
-//    ProductModel *modelProdcut;
+    NSArray *imageProductArr;
 }
 @property (assign) NSInteger expandedSectionHeaderNumber;
 @property (assign) UITableViewHeaderFooterView *expandedSectionHeader;
@@ -33,8 +38,9 @@ static int const kHeaderSectionTag = 6900;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self addSpashImage];
     // Do any additional setup after loading the view, typically from a nib.
-    self.navigationController.topViewController.title = @"Demo";
+    self.navigationController.topViewController.title = @"PRODUCTS";
     
     [self initVariable];
     [self addSwitchBarButton];
@@ -43,9 +49,17 @@ static int const kHeaderSectionTag = 6900;
 //    [self getService];
 }
 
--(void)viewWillAppear:(BOOL)animated
+-(void)addSpashImage
 {
-    [super viewWillAppear:animated];
+    UIView *myView = [[UIView alloc]  init];
+    UIWindow *currentWindow = [UIApplication sharedApplication].keyWindow;
+    myView.frame = currentWindow.frame;
+    NSLog(@"Frame is %f-%f",currentWindow.frame.size.width,currentWindow.frame.size.height);
+    _imgSplash = [[UIImageView alloc] initWithFrame:currentWindow.frame];
+    _imgSplash.image = [UIImage imageNamed:@"fyndLogo"];
+    _imgSplash.backgroundColor = [UIColor whiteColor];
+    _imgSplash.contentMode = UIViewContentModeScaleAspectFit;
+    [currentWindow addSubview:_imgSplash];
 }
 
 -(void)initVariable
@@ -54,6 +68,7 @@ static int const kHeaderSectionTag = 6900;
     self.expandedSectionHeaderNumber = -1;
     serviceNo = 0;
     serviceArr = [[NSArray alloc] initWithObjects:@"jackets",@"polos",@"shirts", nil];//@"sweatshirt"
+    imageProductArr = [[NSArray alloc] initWithObjects:JACKET_URL,POLO_URL,SHIRT_URL, nil];
 
     [self getService:serviceArr[serviceNo]];
     
@@ -86,10 +101,24 @@ static int const kHeaderSectionTag = 6900;
         if (self->serviceNo < self->serviceArr.count) {
             [self getService:self->serviceArr[self->serviceNo]];
         }
+        else
+        {
+            [self removeSplashScreen];
+        }
         
         
     }];
     [dataTask resume];
+}
+
+-(void)removeSplashScreen
+{
+    [UIView animateWithDuration:0.5 animations:^{
+        self->_imgSplash.transform = CGAffineTransformMakeScale(10, 10);
+        self->_imgSplash.alpha = 0;
+    } completion:^(BOOL finished) {
+        
+    }];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -112,32 +141,7 @@ static int const kHeaderSectionTag = 6900;
 //    UIDevice * device = note.object;
     [_tableWithCollectionView reloadData];
     [_tableCollapsableView reloadData];
-//    switch(device.orientation)
-//    {
-//        case UIDeviceOrientationPortrait:
-//            /* start special animation */
-//            NSLog(@"UIDeviceOrientationPortrait");
-//            [_tableWithCollectionView reloadData];
-//            [_tableCollapsableView reloadData];
-//            break;
-//
-//        case UIDeviceOrientationLandscapeLeft:
-//            /* start special animation */
-//            NSLog(@"UIDeviceOrientationLandscapeLeft");
-//            [_tableWithCollectionView reloadData];
-//            [_tableCollapsableView reloadData];
-//            break;
-//
-//        case UIDeviceOrientationLandscapeRight:
-//            /* start special animation */
-//            NSLog(@"UIDeviceOrientationLandscapeRight");
-//            [_tableWithCollectionView reloadData];
-//            [_tableCollapsableView reloadData];
-//            break;
-//
-//        default:
-//            break;
-//    };
+
 }
 
 #pragma mark - Switch navigation Bar
@@ -273,7 +277,7 @@ static int const kHeaderSectionTag = 6900;
 - (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section {
     // recast your view as a UITableViewHeaderFooterView
     UITableViewHeaderFooterView *header = (UITableViewHeaderFooterView *)view;
-    header.contentView.backgroundColor = [UIColor lightGrayColor];
+    header.contentView.backgroundColor = FYND_COLOR_PINK1;//[UIColor lightGrayColor];
     header.textLabel.textColor = [UIColor whiteColor];
     UIImageView *viewWithTag = [self.view viewWithTag:kHeaderSectionTag + section];
     if (viewWithTag) {
@@ -513,7 +517,7 @@ static int const kHeaderSectionTag = 6900;
     ProductCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifierCol forIndexPath:indexPath];
     NSDictionary *dict = [categoryArr objectAtIndex:collectionView.tag];
     ObjectModel *model_ = [[dict objectForKey:@"products"] objectAtIndex:indexPath.item];
-    [cell configureCell:model_];
+    [cell configureCell:model_ ULR:[imageProductArr objectAtIndex:collectionView.tag]];
     return cell;
 }
 

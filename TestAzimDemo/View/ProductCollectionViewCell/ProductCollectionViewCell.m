@@ -13,11 +13,11 @@
 
 
 
--(void)configureCell:(ObjectModel *)model
+-(void)configureCell:(ObjectModel *)model ULR:(NSString *)url
 {
-    [_imgProduct sd_setImageWithURL:[NSURL URLWithString:@"https://d3u4dhauhww2a1.cloudfront.net/product-media/20X/256/256/20-40532640pjpg.jpg"]
+    [_imgProduct sd_setImageWithURL:[NSURL URLWithString:url]
                  placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
-    _lblTitle.text = [NSString stringWithFormat:@"%@\n(%ld)",model.name,(long)model.cost];
+    _lblTitle.text = [NSString stringWithFormat:@"%@\n(₹ %ld)",model.name,(long)model.cost];
 }
 
 @end

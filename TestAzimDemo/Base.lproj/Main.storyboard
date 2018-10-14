@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="nCd-hL-fU4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="nCd-hL-fU4">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -60,22 +60,39 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="211.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S72-SE-DaX">
-                                                    <rect key="frame" x="15" y="11" width="217" height="21"/>
-                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="dOI-AX-IlH">
-                                                    <rect key="frame" x="240" y="11" width="120" height="29"/>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BsG-FE-kul">
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S72-SE-DaX">
+                                                            <rect key="frame" x="8" y="11" width="231" height="21"/>
+                                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bordered" selectedSegmentIndex="0" springLoaded="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dOI-AX-IlH">
+                                                            <rect key="frame" x="247" y="8" width="120" height="29"/>
+                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="120" id="it5-rm-uSs"/>
+                                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="120" id="tZl-Qi-EgK"/>
+                                                            </constraints>
+                                                            <segments>
+                                                                <segment title="NAME"/>
+                                                                <segment title="PRICE"/>
+                                                            </segments>
+                                                            <color key="tintColor" red="0.12751173973083496" green="0.57475149631500244" blue="0.62562352418899536" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        </segmentedControl>
+                                                    </subviews>
+                                                    <color key="backgroundColor" red="0.93030864000000002" green="0.2605381906" blue="0.53984940049999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="120" id="it5-rm-uSs"/>
+                                                        <constraint firstItem="S72-SE-DaX" firstAttribute="leading" secondItem="BsG-FE-kul" secondAttribute="leading" constant="8" id="3w4-HP-Wty"/>
+                                                        <constraint firstItem="dOI-AX-IlH" firstAttribute="leading" secondItem="S72-SE-DaX" secondAttribute="trailing" constant="8" id="69y-Us-mlg"/>
+                                                        <constraint firstItem="S72-SE-DaX" firstAttribute="top" secondItem="BsG-FE-kul" secondAttribute="top" constant="11" id="cbL-M0-tWY"/>
+                                                        <constraint firstAttribute="trailing" secondItem="dOI-AX-IlH" secondAttribute="trailing" constant="8" id="g6C-F8-y5j"/>
+                                                        <constraint firstAttribute="bottom" secondItem="S72-SE-DaX" secondAttribute="bottom" constant="12" id="lqJ-OA-o7u"/>
+                                                        <constraint firstItem="dOI-AX-IlH" firstAttribute="centerY" secondItem="BsG-FE-kul" secondAttribute="centerY" id="of8-5b-kJ1"/>
                                                     </constraints>
-                                                    <segments>
-                                                        <segment title="NAME"/>
-                                                        <segment title="PRICE"/>
-                                                    </segments>
-                                                </segmentedControl>
+                                                </view>
                                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="nXl-7G-trP">
                                                     <rect key="frame" x="15" y="47" width="345" height="154"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -100,8 +117,9 @@
                                                                         <rect key="frame" x="2" y="2" width="46" height="46"/>
                                                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     </imageView>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bJO-66-Crp">
+                                                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.80000000000000004" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bJO-66-Crp">
                                                                         <rect key="frame" x="2" y="30" width="46" height="18"/>
+                                                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                                         <nil key="textColor"/>
                                                                         <nil key="highlightedColor"/>
@@ -126,15 +144,13 @@
                                                 </collectionView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="S72-SE-DaX" firstAttribute="top" secondItem="x96-yY-ho3" secondAttribute="top" constant="11" id="60H-4D-yuA"/>
-                                                <constraint firstItem="nXl-7G-trP" firstAttribute="top" secondItem="S72-SE-DaX" secondAttribute="bottom" constant="15" id="AAy-No-SCe"/>
-                                                <constraint firstItem="dOI-AX-IlH" firstAttribute="leading" secondItem="S72-SE-DaX" secondAttribute="trailing" constant="8" id="Bhl-ac-Sm8"/>
                                                 <constraint firstAttribute="bottom" secondItem="nXl-7G-trP" secondAttribute="bottom" constant="10.5" id="EGc-8e-yXD"/>
+                                                <constraint firstItem="BsG-FE-kul" firstAttribute="leading" secondItem="x96-yY-ho3" secondAttribute="leading" id="Kgg-Vh-Vqs"/>
                                                 <constraint firstAttribute="trailing" secondItem="nXl-7G-trP" secondAttribute="trailing" constant="15" id="Ldu-nW-XhK"/>
                                                 <constraint firstItem="nXl-7G-trP" firstAttribute="leading" secondItem="x96-yY-ho3" secondAttribute="leading" constant="15" id="Ojs-CG-wy3"/>
-                                                <constraint firstItem="S72-SE-DaX" firstAttribute="leading" secondItem="x96-yY-ho3" secondAttribute="leading" constant="15" id="dWH-mK-CqA"/>
-                                                <constraint firstAttribute="trailing" secondItem="dOI-AX-IlH" secondAttribute="trailing" constant="15" id="sg6-Zv-CLy"/>
-                                                <constraint firstItem="dOI-AX-IlH" firstAttribute="top" secondItem="x96-yY-ho3" secondAttribute="top" constant="11" id="xMs-uf-Aei"/>
+                                                <constraint firstItem="nXl-7G-trP" firstAttribute="top" secondItem="BsG-FE-kul" secondAttribute="bottom" constant="3" id="SyD-9u-Avi"/>
+                                                <constraint firstAttribute="trailing" secondItem="BsG-FE-kul" secondAttribute="trailing" id="VN9-4j-1Lj"/>
+                                                <constraint firstItem="BsG-FE-kul" firstAttribute="top" secondItem="x96-yY-ho3" secondAttribute="top" id="vDc-3c-tSm"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -196,6 +212,11 @@
                                 <state key="normal" title="CROP">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="CropPressed:" destination="Zug-s1-fC2" eventType="touchUpInside" id="Xys-GF-LBB"/>
                                 </connections>
@@ -204,9 +225,11 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="cwM-8F-eK4" firstAttribute="bottom" secondItem="DOP-7t-XRh" secondAttribute="bottom" constant="6" id="JVW-FL-Ol2"/>
+                            <constraint firstItem="cwM-8F-eK4" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="Kh6-NW-sst" secondAttribute="bottom" constant="8" id="Mef-3E-LAb"/>
                             <constraint firstItem="Kh6-NW-sst" firstAttribute="leading" secondItem="cwM-8F-eK4" secondAttribute="leading" constant="8" id="aOl-ax-Fyf"/>
                             <constraint firstItem="DOP-7t-XRh" firstAttribute="centerX" secondItem="3QO-Mr-vOZ" secondAttribute="centerX" id="fHa-V6-GT4"/>
                             <constraint firstItem="cwM-8F-eK4" firstAttribute="trailing" secondItem="Kh6-NW-sst" secondAttribute="trailing" constant="8" id="hVb-CI-eN0"/>
+                            <constraint firstItem="Kh6-NW-sst" firstAttribute="top" relation="greaterThanOrEqual" secondItem="cwM-8F-eK4" secondAttribute="top" constant="8" id="k6U-Zm-F1D"/>
                             <constraint firstItem="Kh6-NW-sst" firstAttribute="centerY" secondItem="3QO-Mr-vOZ" secondAttribute="centerY" id="xtj-Px-bPr"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="cwM-8F-eK4"/>

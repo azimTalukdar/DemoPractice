@@ -17,6 +17,8 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *constantTableCollection;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *constantTableCollapsable;
 
+@property (strong, nonatomic) UIView *viewSpalsh;
+@property (strong, nonatomic) UIImageView *imgSplash;
 
 @end
 

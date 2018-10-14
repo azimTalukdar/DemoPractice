@@ -13,5 +13,5 @@
 @property (weak, nonatomic) IBOutlet UIImageView *imgProduct;
 @property (weak, nonatomic) IBOutlet UILabel *lblTitle;
 
--(void)configureCell:(ObjectModel *)model;
+-(void)configureCell:(ObjectModel *)model ULR:(NSString *)url;
 @end
